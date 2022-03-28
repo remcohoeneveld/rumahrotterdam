@@ -1,8 +1,4 @@
 # Template for the therumah websites
-## This is uncludes 
-
-### #BrandScholary 
-### #BrandSolutions
 
 [![CI](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml/badge.svg?branch=9.x)](https://github.com/drupal-composer/drupal-project/actions/workflows/ci.yml)
 
