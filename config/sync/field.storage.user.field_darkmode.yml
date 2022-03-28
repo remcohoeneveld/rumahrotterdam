@@ -1,0 +1,18 @@
+uuid: 1a14ce9f-7525-4c4e-8cf4-602f5907ea0a
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_darkmode
+field_name: field_darkmode
+entity_type: user
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

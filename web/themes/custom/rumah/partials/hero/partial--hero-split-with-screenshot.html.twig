@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a hero block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="lg:relative">
+  <div
+    class="mx-auto max-w-7xl w-full pt-16 pb-20 text-center lg:py-48 lg:text-left">
+    <div class="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
+      <h1
+        class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+        <span class="block xl:inline">{{ content.field_title }}</span>
+        <span
+          class="block text-rumah-600 xl:inline">{{ content.field_subtitle }}</span>
+      </h1>
+      <p
+        class="mt-3 max-w-md mx-auto text-lg text-gray-500 dark:text-white sm:text-xl md:mt-5 md:max-w-3xl">
+        {{ content.body|render|striptags }}</p>
+      <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
+        {% if content.field_link_left.0 %}
+          <div class="rounded-md shadow">
+            <a href="{{ content.field_link_left[0]['#url']|render }}"
+               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rumah-600 hover:bg-rumah-700 md:py-4 md:text-lg md:px-10">{{ content.field_link_left[0]['#title']|render }}</a>
+          </div>
+        {% endif %}
+        {% if content.field_link_right.0 %}
+          <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+            <a href="{{ content.field_link_right[0]['#url']|render }}"
+               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-rumah-600 bg-white dark:bg-black hover:bg-gray-50 md:py-4 md:text-lg md:px-10">{{ content.field_link_right[0]['#title']|render }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if content.field_image is not empty %}
+    <div
+      class="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
+      <img class="absolute inset-0 w-full h-full object-cover"
+           src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}"
+           alt="">
+    </div>
+  {% endif %}
+</div>

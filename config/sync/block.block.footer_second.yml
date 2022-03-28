@@ -1,0 +1,25 @@
+uuid: 2bab4a45-7427-4341-bd0c-c3787340d126
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-second
+  module:
+    - system
+  theme:
+    - rumah
+id: footer_second
+theme: rumah
+region: footer_second
+weight: -4
+provider: null
+plugin: 'system_menu_block:footer-second'
+settings:
+  id: 'system_menu_block:footer-second'
+  label: Support
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

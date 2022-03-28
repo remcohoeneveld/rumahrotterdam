@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+}
+
+:root {
+  --toolbar-height: 39px;
+  --toolbar-tray-height: 40px;
+  --toolbar-tray-vertical-width: 239px;
+}
+
+@layer components {
+  .block,
+  .node {
+    @apply mb-4
+  }
+
+  .node__content p,
+  .node__content ul,
+  .node__content ol {
+    @apply mb-4 leading-normal
+  }
+
+  [id$="-local-tasks"] ul {
+    @apply list-disc list-inside
+  }
+
+  .page--user-password p {
+    @apply py-2 text-gray-500 text-sm
+  }
+
+  .page--user-register .description,
+  .page--user-register .password-suggestions,
+  .page--user-register .password-confirm,
+  .page--user-register .password-strength,
+  .page--user-register .password-strength__text {
+    @apply py-2 text-gray-500 text-sm
+  }
+
+  .page--user-register .js-password-confirm-message {
+    @apply hidden
+  }
+
+  .page--user-register .password-strength__indicator {
+    @apply bg-green-600
+  }
+}
+
+.vertical-tabs .vertical-tabs__menu-item.is-selected {
+  @apply dark:bg-black bg-white
+}
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-item-title {
+  @apply dark:text-white
+}
+
+.svg-invert {
+  filter: invert(1);
+}
+
+.layout-builder {
+  border: none;
+  background: transparent;
+}
+.layout-builder__add-section {
+  background: transparent;
+}
+.layout-builder-block,
+.layout-builder__add-block {
+  background: transparent;
+}
+.layout-builder__link--add:hover {
+  color: #D57900;
+}
+.layout-builder__region {
+  outline: 2px dashed #D57900;
+}
+
+.m-0-important {
+  margin: 0 !important;
+}
+
+#block-exposedformsearch-contentpage-1 label {
+  display: none;
+}
+
+.toolbar-fixed .mobile-sidebar-user-page,
+.toolbar-fixed .desktop-sidebar-user-page,
+.toolbar-icon-9 .mobile-sidebar-user-page,
+.toolbar-icon-9 .desktop-sidebar-user-page {
+  padding-top: var(--toolbar-height);
+}
+
+.toolbar-fixed.toolbar-vertical.toolbar-tray-open .mobile-sidebar-user-page,
+.toolbar-fixed.toolbar-vertical.toolbar-tray-open .desktop-sidebar-user-page {
+  left: var(--toolbar-tray-vertical-width);
+}
+
+.toolbar-fixed.toolbar-horizontal.toolbar-tray-open .mobile-sidebar-user-page,
+.toolbar-fixed.toolbar-horizontal.toolbar-tray-open .desktop-sidebar-user-page {
+  padding-top: calc(var(--toolbar-tray-height) + var(--toolbar-height));
+}
+
+.form-item-field-darkmode-value {
+  display: inline-flex;
+  padding: 12px;
+  margin: 10px 0;
+  @apply dark:bg-white bg-black max-w-max rounded-md shadow-sm
+}
+
+.form-item-field-darkmode-value label {
+  margin-left: 10px;
+  margin-bottom: 0;
+  line-height: 10px;
+  @apply text-rumah-600
+}
+
+.user-profile-edit .page-header {
+ @apply text-lg leading-6 font-medium text-gray-900 dark:text-white
+}
+.user-profile-edit form {
+  @apply space-y-2 mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2
+}
+.user-profile-edit form input[type="submit"] {
+  margin-top: 20px;
+}
+
+.password-strength__indicator {
+  @apply bg-rumah-400
+}
+
+.password-suggestions,
+.description {
+  @apply text-gray-400 mb-2
+}
+
+.js-password-confirm-message  {
+  @apply bg-rumah-600 text-white p-2 rounded-md shadow-sm max-w-fit
+}
+
+.user--page .branding-block {
+  display: none;
+}

@@ -1,0 +1,12 @@
+uuid: ca931560-77e1-4879-828a-d6e57b41378e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:5eb8dc36-7a07-4244-ab1a-325fc7cde39d'
+id: feature_list_item
+label: 'Feature list item'
+icon_uuid: 5eb8dc36-7a07-4244-ab1a-325fc7cde39d
+icon_default: 'data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaC02IHctNiIgeC1kZXNjcmlwdGlvbj0iSGVyb2ljb24gbmFtZTogb3V0bGluZS9nbG9iZS1hbHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2U9ImN1cnJlbnRDb2xvciIgYXJpYS1oaWRkZW49InRydWUiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiBkPSJNMjEgMTJhOSA5IDAgMDEtOSA5bTktOWE5IDkgMCAwMC05LTltOSA5SDNtOSA5YTkgOSAwIDAxLTktOW05IDljMS42NTcgMCAzLTQuMDMgMy05cy0xLjM0My05LTMtOW0wIDE4Yy0xLjY1NyAwLTMtNC4wMy0zLTlzMS4zNDMtOSAzLTltLTkgOWE5IDkgMCAwMTktOSI+PC9wYXRoPgo8L3N2Zz4K'
+description: 'Adds feature list items to custom blocks.'
+behavior_plugins: {  }

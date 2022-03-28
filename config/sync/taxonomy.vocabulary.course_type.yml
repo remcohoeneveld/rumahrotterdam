@@ -1,0 +1,8 @@
+uuid: fdf5c449-7f1f-441a-b2ba-73e248dd4794
+langcode: en
+status: true
+dependencies: {  }
+name: 'Course type'
+vid: course_type
+description: 'Adds course types such as (Sales, Fundamentals ect)'
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 25df7282-442d-4a4c-be97-e12622cd2b5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - rumah
+id: mainnavigation
+theme: rumah
+region: primary_menu
+weight: -3
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/user\r\n/user/*"

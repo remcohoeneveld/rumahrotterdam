@@ -1,0 +1,45 @@
+uuid: 0fb85a25-b012-4588-8c50-c72a92296f63
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_cta_type
+field_name: field_cta_type
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: simple_centered
+      label: 'Simple centered'
+    -
+      value: simple_center_branded
+      label: 'Simple center branded'
+    -
+      value: simple_justified_on_brand
+      label: 'Simple justified on light brand'
+    -
+      value: simple_justified
+      label: 'Simple justified'
+    -
+      value: simple_stacked
+      label: 'Simple stacked'
+    -
+      value: split_with_image
+      label: 'Split with image'
+    -
+      value: brand_panel_with_overlapping_image
+      label: 'Brand panel with overlapping image'
+    -
+      value: brand_panel_with_app_screenshot
+      label: 'Brand panel with app screenshot'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,17 @@
+<div class="relative py-16 bg-white overflow-hidden dark:bg-black">
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="text-lg max-w-prose mx-auto">
+      <h1>
+        {% if content.field_subtitle.0 %}
+          <span class="block text-base text-center text-rumah-600 font-semibold tracking-wide uppercase">{{ content.field_subtitle.0 }}</span>
+        {% endif %}
+        {% if content.field_title.0 %}
+          <span class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl dark:text-white">{{ content.field_title.0 }}</span>
+        {% endif %}
+      </h1>
+    </div>
+    <div class="mt-6 prose dark:prose-invert prose-rumah prose-lg text-gray-500 mx-auto dark:text-white">
+      {{ content.field_description }}
+    </div>
+  </div>
+</div>

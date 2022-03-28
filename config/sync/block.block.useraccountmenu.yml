@@ -1,0 +1,25 @@
+uuid: 2234a62c-5d83-4a51-aa1a-5eb40b221ac2
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - rumah
+id: useraccountmenu
+theme: rumah
+region: primary_menu
+weight: -2
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

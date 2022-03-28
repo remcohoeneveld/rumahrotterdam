@@ -1,0 +1,26 @@
+uuid: b2072fdf-848c-45e0-9312-349803ccb3a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rumah
+id: tabs__user_mobile
+theme: rumah
+region: sidebar_first
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/user\r\n/user/*"

@@ -1,0 +1,23 @@
+uuid: 9f30e8db-b50e-41cf-a7d2-e4e5ac679145
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.feature_section
+    - field.storage.block_content.field_feature_type
+  module:
+    - options
+id: block_content.feature_section.field_feature_type
+field_name: field_feature_type
+entity_type: block_content
+bundle: feature_section
+label: 'Feature type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: with_feature_list
+default_value_callback: ''
+settings: {  }
+field_type: list_string

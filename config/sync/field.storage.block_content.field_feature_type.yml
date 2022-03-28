@@ -1,0 +1,33 @@
+uuid: 24f2beb8-5046-491d-a262-add27c89f226
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_feature_type
+field_name: field_feature_type
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: with_feature_list
+      label: 'With feature list'
+    -
+      value: with_feature_grid_list
+      label: 'With feature grid list'
+    -
+      value: grid_with_offset_icons
+      label: 'Grid with offset icons'
+    -
+      value: 4_2_grid_on_brand
+      label: '4x2 grid on brand'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

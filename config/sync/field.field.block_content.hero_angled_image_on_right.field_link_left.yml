@@ -1,0 +1,23 @@
+uuid: 70f5edd5-f2bd-4371-a6fb-e37f0ec2b702
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+    - field.storage.block_content.field_link_left
+  module:
+    - link
+id: block_content.hero_angled_image_on_right.field_link_left
+field_name: field_link_left
+entity_type: block_content
+bundle: hero_angled_image_on_right
+label: 'Link left'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

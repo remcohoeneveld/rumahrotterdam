@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a hero block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="relative">
+  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-white dark:bg-black"></div>
+  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+      <div class="absolute inset-0">
+        {% if content.field_image is not empty %}
+          <img class="h-full w-full object-cover" src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}" alt="rumah-image">
+        {% else %}
+          <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="default-image">
+        {% endif %}
+        <div class="absolute inset-0 bg-rumah-700 mix-blend-multiply"></div>
+      </div>
+      <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+        <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          <span class="block text-white">{{ content.field_title }}</span>
+          <span class="block text-rumah-200">{{ content.sub_title }}</span>
+        </h1>
+        <p class="mt-6 max-w-lg mx-auto text-center text-xl text-rumah-200 sm:max-w-3xl">{{ content.body|render|striptags }}</p>
+        <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+          <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+            {% if content.field_link_left.0 %}
+              <a href="{{ content.field_link_left[0]['#url']|render }}" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-rumah-700 bg-white hover:bg-rumah-50 sm:px-8"> {{ content.field_link_left[0]['#title']|render }}</a>
+            {% endif %}
+            {% if content.field_link_right.0 %}
+            <a href="{{ content.field_link_right[0]['#url']|render }}" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-rumah-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8">{{ content.field_link_right[0]['#title']|render }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

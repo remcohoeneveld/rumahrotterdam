@@ -1,0 +1,8 @@
+uuid: 92bb1bfd-7528-440b-8bb2-837b542466c5
+langcode: en
+status: true
+dependencies: {  }
+id: feature_section
+label: 'Feature section'
+revision: 0
+description: 'Feature sections can be used in different configurations.'

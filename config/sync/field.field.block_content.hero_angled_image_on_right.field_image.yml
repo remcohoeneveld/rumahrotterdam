@@ -1,0 +1,29 @@
+uuid: 5c359f65-074b-48bc-9fd3-6409cdd0a681
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+    - field.storage.block_content.field_image
+    - media.type.image
+id: block_content.hero_angled_image_on_right.field_image
+field_name: field_image
+entity_type: block_content
+bundle: hero_angled_image_on_right
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

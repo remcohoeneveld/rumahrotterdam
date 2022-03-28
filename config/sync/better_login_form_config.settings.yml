@@ -1,0 +1,25 @@
+_core:
+  default_config_hash: veaPM7BBX2ddz3EiBW3XyuWLtsqgU9s-zN5oWOIca_A
+form_title: 'Log in'
+username_label: Username
+username_description: ''
+password_label: Password
+password_description: ''
+login_button: 'Log in'
+forgot_form_title: 'Reset your password'
+register_form_title: 'Create new account'
+register_form_mail: 'Email address'
+register_mail_desc: ''
+register_form_name: Username
+register_form_name_desc: ''
+register_form_button: 'Create new account'
+forgot_form_username_desc: ''
+forgot_form_username: 'Username or email address'
+forgot_form_button: Submit
+include_login: 1
+include_regi_template: 1
+include_forgot_template: 1
+login_page_link: 0
+create_account: 0
+forgot_password: 0
+back_to_home: 0

@@ -1,0 +1,20 @@
+uuid: 03b2246d-e75c-46bc-b0d3-b6c43839bf2d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rumah
+id: messages
+theme: rumah
+region: help
+weight: -2
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

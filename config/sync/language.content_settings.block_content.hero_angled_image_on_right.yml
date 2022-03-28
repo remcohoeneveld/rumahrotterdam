@@ -1,0 +1,11 @@
+uuid: 39c367b4-b8e0-46e8-9a7c-2c6459734f20
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+id: block_content.hero_angled_image_on_right
+target_entity_type_id: block_content
+target_bundle: hero_angled_image_on_right
+default_langcode: site_default
+language_alterable: false

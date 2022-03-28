@@ -1,0 +1,88 @@
+uuid: 5a7dc8e2-87fd-463a-b84a-66cec350d484
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+    - field.field.block_content.hero_angled_image_on_right.body
+    - field.field.block_content.hero_angled_image_on_right.field_hero_type
+    - field.field.block_content.hero_angled_image_on_right.field_image
+    - field.field.block_content.hero_angled_image_on_right.field_link_left
+    - field.field.block_content.hero_angled_image_on_right.field_link_right
+    - field.field.block_content.hero_angled_image_on_right.field_subtitle
+    - field.field.block_content.hero_angled_image_on_right.field_title
+  module:
+    - link
+    - options
+    - text
+id: block_content.hero_angled_image_on_right.default
+targetEntityType: block_content
+bundle: hero_angled_image_on_right
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_hero_type:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_link_left:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_link_right:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

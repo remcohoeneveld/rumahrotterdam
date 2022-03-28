@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Tailwind CSS theme.
+ */
+
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\user\Entity\User;
+use Symfony\Component\Routing\Route;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_preprocess_block(array &$variables): void {
+  if (rumah_get_active_theme() == 'rumah' && $variables['base_plugin_id'] == 'system_branding_block') {
+    $variables['site_logo'] = '';
+    if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+      $variables['site_logo'] = str_replace('.svg', '.jpg', $variables['content']['site_logo']['#uri']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_preprocess_html(array &$variables): void {
+  // Set darkmode to True.
+  $variables['darkmode'] = TRUE;
+  $user = _rumah_get_current_user();
+
+  if (
+    $user instanceof User &&
+    $user->hasField('field_darkmode') &&
+    !$user->get('field_darkmode')->isEmpty()
+  ) {
+    $variables['darkmode'] = !boolval($user->get('field_darkmode')->value);
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_preprocess_page(array &$variables): void {
+  // Set the site logo.
+  $variables['site_logo'] = '/' . \Drupal::theme()->getActiveTheme()->getPath() . '/logo.jpg';
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function rumah_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook === 'page') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof Node) {
+      $suggestions[] = $hook . '__node_' . $node->bundle();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_paragraph_alter().
+ */
+function rumah_theme_suggestions_paragraph_alter(array &$suggestions, array $variables): void {
+  if (
+    !isset($variables["elements"]["#paragraph"]) ||
+    !$variables["elements"]["#paragraph"] instanceof Paragraph
+  ) {
+    return;
+  }
+
+  $paragraph = $variables["elements"]["#paragraph"];
+
+  if ($paragraph->getParentEntity() instanceof BlockContent) {
+    $block_content = $paragraph->getParentEntity();
+    if (
+      $block_content->hasField('field_feature_type') &&
+      !$block_content->get('field_feature_type')->isEmpty()
+    ) {
+      $suggestions[] = $suggestions[1] . '_' . $block_content->get('field_feature_type')->value;
+    }
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function rumah_theme_suggestions_menu_alter(array &$suggestions, array $variables): void {
+  $logged_in = \Drupal::currentUser()->isAuthenticated();
+  $logged_in_string = $logged_in ? 'logged_in' : 'not_logged_in';
+
+  $suggestions[] = $suggestions[0] . '_' . $logged_in_string;
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_local_tasks_alter().
+ */
+function rumah_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables): void {
+  $route_object = \Drupal::routeMatch()->getRouteObject();
+  if (!$route_object instanceof Route) {
+    return;
+  }
+
+  if (strpos($route_object->getPath(), '/user/') !== FALSE) {
+    $suggestions[] = $variables["theme_hook_original"] . '__user';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_local_tasks_alter().
+ */
+function rumah_theme_suggestions_menu_local_task_alter(array &$suggestions, array $variables): void {
+  $route_object = \Drupal::routeMatch()->getRouteObject();
+  if (!$route_object instanceof Route) {
+    return;
+  }
+
+  if (strpos($route_object->getPath(), '/user/') !== FALSE) {
+    $suggestions[] = $variables["theme_hook_original"] . '__user';
+  }
+}
+
+/**
+ * Get the active theme.
+ *
+ * @return string
+ *   The name of the active theme.
+ */
+function rumah_get_active_theme(): string {
+  return \Drupal::service('theme.manager')->getActiveTheme()->getName();
+}
+
+/**
+ * Get the current user.
+ *
+ * @return \Drupal\user\Entity\User|null
+ *   The user entity or null.
+ */
+function _rumah_get_current_user() {
+  $user = \Drupal::service('entity_type.manager')->getStorage('user')->load(\Drupal::currentUser()->id());
+  if ($user instanceof User && $user->isAuthenticated()) {
+    return $user;
+  }
+  return NULL;
+}

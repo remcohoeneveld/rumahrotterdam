@@ -1,0 +1,25 @@
+uuid: f57f4ad3-921f-44e7-ad22-3aae91b6f2fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-fourth
+  module:
+    - system
+  theme:
+    - rumah
+id: footer_fourth
+theme: rumah
+region: footer_second
+weight: -3
+provider: null
+plugin: 'system_menu_block:footer-fourth'
+settings:
+  id: 'system_menu_block:footer-fourth'
+  label: Legal
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

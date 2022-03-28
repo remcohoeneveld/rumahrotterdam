@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a hero block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="relative bg-white dark:bg-black overflow-hidden">
+  <div class="relative pt-6 pb-16 sm:pb-24">
+    <div class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6">
+      <div class="text-center">
+        <h1
+          class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
+          <span class="block">{{ content.field_title }}</span>
+          <span class="block text-rumah-600">{{ content.field_subtitle }}</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-base text-gray-500 dark:text-white sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+          {{ content.body|render|striptags }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {% if content.field_image is not empty %}
+    <div class="relative">
+      <div class="absolute inset-0 flex flex-col" aria-hidden="true">
+        <div class="flex-1"></div>
+        <div class="flex-1 w-full bg-rumah-800"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <img class="relative rounded-lg shadow-lg"
+             src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}"
+             alt="App screenshot">
+      </div>
+    </div>
+  {% endif %}
+
+</div>

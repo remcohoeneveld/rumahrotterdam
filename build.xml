@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Rumah" default="list-commands">
+
+  <!-- ============================================  -->
+  <!-- Generic variables                             -->
+  <!-- ============================================  -->
+  <property name="dir.project" value="${project.basedir}"/>
+  <property name="dir.vendor" value="${dir.project}/vendor"/>
+  <property name="dir.bin" value="${dir.vendor}/bin"/>
+  <property name="dir.web" value="${dir.project}/web"/>
+  <property name="dir.modules" value="${dir.web}/modules"/>
+  <property name="dir.profiles" value="${dir.web}/profiles"/>
+  <property name="dir.themes" value="${dir.web}/themes"/>
+  <property name="dir.sites" value="${dir.web}/sites"/>
+  <property name="dir.default" value="${dir.sites}/default"/>
+  <property name="dir.files" value="${dir.default}/files"/>
+  <property name="dir.keys" value="${dir.project}/keys"/>
+  <property name="filename.settings.local" value="settings.local.php"/>
+  <property name="dir.gitlab" value="${dir.project}/gitlab"/>
+  <property name="dir.settings.local" value="${dir.gitlab}/build/settings"/>
+  <property name="dir.db" value="${dir.gitlab}/build/db" />
+  <property name="file.db" value="base.sql.gz" />
+  <property name="base.db" value="${dir.db}/${file.db}" />
+  <property name="dir.default_backup" value="${dir.project}/../../backups/default_db_dump" />
+  <property name="file.default_db_dump" value="${dir.default_backup}/default_db_dump.sql.gz" />
+  <property name="file.drushrc" value="drushrc.php" />
+  <property name="translation.folder" value="${project.basedir}/translations" />
+  <property name="translation.file" value="${translation.folder}/nl.po" />
+
+  <property name="composer_docker" value="/usr/local/bin/composer" />
+  <property name="drush" value="${dir.bin}/drush" />
+  <property name="default.config" value="sync" />
+  <!-- Current directory name only, not the exact path; used as the local domain name. -->
+  <exec command="echo ${PWD##*/}" outputProperty="dir.projectName" />
+
+  <!-- Properties that are set by -Dparameter=value command line input arguments. -->
+  <property name="update-database" value="true" />
+  <property name="no-dev" value="false" />
+  <property name="otap" value="false" />
+  <property name="run-composer" value="true" />
+  <property name="permissions" value="true" />
+
+  <target name="list-commands" hidden="true">
+    <exec command="phing -l" passthru="true" />
+  </target>
+
+  <!-- ============================================  -->
+  <!-- TASKS                                         -->
+  <!-- ============================================  -->
+
+  <!-- ======================  -->
+  <!-- BUILD                   -->
+  <!-- ======================  -->
+  <target name="build" description="Normal complete build, use this after retrieving the git repo." depends="
+    composer-install,
+    install-drupal
+  ">
+    <echo message="Finished creating build." />
+  </target>
+
+  <!-- Composer install -->
+  <target name="composer-install">
+    <echo message="Running composer install..." />
+    <if>
+      <istrue value="${run-composer}" />
+      <then>
+        <if>
+          <istrue value="${otap}" />
+          <then>
+            <composer command="install" composer="${composer_docker}" />
+          </then>
+          <else>
+            <if>
+              <istrue value="${no-dev}" />
+              <then>
+                <exec command="composer install --optimize-autoloader --no-dev" passthru="true" checkreturn="true" />
+              </then>
+              <else>
+                <exec command="composer install --optimize-autoloader" passthru="true" checkreturn="true" />
+              </else>
+            </if>
+          </else>
+        </if>
+      </then>
+    </if>
+  </target>
+
+  <!-- Install Drupal -->
+  <target name="install-drupal" hidden="true" depends="
+    check-setup,
+    permissions,
+    drupal-import-database,
+    config-import,
+    permissions
+  ">
+    <echo message="Re-installed Drupal." />
+  </target>
+
+  <!-- ======================  -->
+  <!-- AFTER DEPLOY            -->
+  <!-- ======================  -->
+  <target name="after-deploy" description="Update existing environment after a deploy." depends="
+    check-setup,
+    permissions,
+    config-import,
+    permissions
+  ">
+    <echo message="Updated Drupal." />
+  </target>
+
+  <!-- Check setup -->
+  <target name="check-setup" hidden="true">
+    <echo message="Checking if 'web/sites/default/${filename.settings.local}' exists." />
+    <if>
+      <not>
+        <available file="${dir.default}/${filename.settings.local}" type="file" property="checked.settings.local" />
+      </not>
+      <then>
+        <!-- Start copying and filling settings.local.php -->
+        <phingcall target="setup-local" />
+      </then>
+    </if>
+  </target>
+
+  <!-- Local setup targets -->
+  <target name="setup-local" hidden="true" depends="
+    check:copy.settings.local,
+    check:database.setup
+  " />
+
+  <!-- Copy example settings.local.php to web/sites/default -->
+  <target name="check:copy.settings.local" hidden="true">
+    <echo message="Copying default settings.local to ${dir.default}" />
+    <exec command="cp ${dir.settings.local}/default.settings.local.php ${dir.default}/${filename.settings.local}" />
+  </target>
+
+  <target name="check:database.setup" hidden="true">
+    <!-- Retry 2 times if the database doesn't exist. -->
+    <retry retryCount="2">
+      <phingcall target="check:configure.settings.local" />
+    </retry>
+    <echo message="Database setup complete." />
+  </target>
+
+  <!-- Configure settings.local.php -->
+  <target name="check:configure.settings.local" hidden="true" depends="
+    check:database.exists
+  ">
+    <exec command="chmod 755 ${dir.default}" passthru="true" />
+    <exec command="chmod 644 ${dir.default}/${filename.settings.local}" passthru="true" />
+    <echo message="database name: ${dbName}" />
+    <!-- Set database name -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;database\&apos; =&gt; \&apos;\&apos;/\&apos;database\&apos; =&gt; \&apos;${dbName}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+    <!-- Set database username -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;username\&apos; =&gt; \&apos;\&apos;/\&apos;username\&apos; =&gt; \&apos;${dbUser}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+    <!-- Set database password -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;password\&apos; =&gt; \&apos;\&apos;/\&apos;password\&apos; =&gt; \&apos;${dbPw}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+    <!-- Set database prefix -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;prefix\&apos; =&gt; \&apos;\&apos;/\&apos;prefix\&apos; =&gt; \&apos;${dbPrefix}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+    <!-- Set database host -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;host\&apos; =&gt; \&apos;localhost\&apos;/\&apos;host\&apos; =&gt; \&apos;${dbHost}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+    <!-- Set database port -->
+    <exec command="sed -i &apos;&apos; &quot;s/\&apos;port\&apos; =&gt; \&apos;3306\&apos;/\&apos;port\&apos; =&gt; \&apos;${dbPort}\&apos;/g&quot; ${dir.default}/${filename.settings.local}" passthru="true" />
+  </target>
+
+  <!-- Check if supplied database settings are correct. -->
+  <target name="check:database.exists" hidden="true" depends="
+    check:database.input
+  ">
+    <exec command="mysqlshow -h${dbHost} -u${dbUser} -p${dbPw} &quot;${dbName}&quot; &amp;&gt; /dev/null &amp;&amp; echo true || echo false" outputProperty="dbExists" />
+    <if>
+      <equals arg1="${dbExists}" arg2="false" />
+      <then>
+        <fail message="Database doesn't appear to exist." />
+      </then>
+      <else>
+        <echo message="Database exists and is available with supplied credentials." />
+      </else>
+    </if>
+  </target>
+
+  <!-- Ask for database credentials -->
+  <target name="check:database.input" hidden="true">
+    <echo message="Configure database: " />
+    <input message="db name: " propertyName="dbName" />
+    <input message="db host: " propertyName="dbHost" defaultValue="localhost" />
+    <input message="db port: " propertyName="dbPort" defaultValue="3306" />
+    <input message="db prefix: " propertyName="dbPrefix" />
+    <input message="db username: " propertyName="dbUser" defaultValue="root" />
+    <input message="db password: " propertyName="dbPw" promptChar="" defaultValue="root" />
+    <if>
+      <equals arg1="${dbName}" arg2="" />
+      <then>
+        <fail message="Please fill in the database name." />
+      </then>
+    </if>
+  </target>
+
+  <!-- Config import -->
+  <target name="config-import" depends="
+    drupal-cache-rebuild,
+    drupal-updates,
+    drupal-config-sync,
+    drupal-locale-update,
+    drupal-cache-rebuild
+  ">
+    <echo message="Finished setting up Drupal." />
+  </target>
+
+  <!-- Drupal database -->
+  <target name="drupal-import-database" hidden="true">
+    <if>
+      <isfalse value="${otap}" />
+      <then>
+        <property name="db" value="${base.db}" />
+        <property name="db_name" value="/build/db/base.sql.gz" />
+        <input message="This will delete your current database, are you sure? " propertyName="deleteDbYn" validArgs="y,n" defaultValue="y" />
+        <if>
+          <equals arg1="${deleteDbYn}" arg2="n" />
+          <then>
+            <fail message="Aborted." />
+          </then>
+        </if>
+      </then>
+    </if>
+
+    <if>
+      <istrue value="${otap}" />
+      <then>
+        <if>
+          <available file="${file.default_db_dump}" type="file" />
+          <then>
+            <property name="db" value="${file.default_db_dump}" />
+            <property name="db_name" value="../../backups/default_db_dump/default_db_dump.sql.gz" />
+          </then>
+          <else>
+            <if>
+              <not>
+                <available file="${base.db}" type="file" property="checked.base.db" />
+              </not>
+              <then>
+                <!-- Provide info about the db dump file. -->
+                <fail message="Please install Drupal and export the initial database into /build/db/base.sql.gz.\nThe dump is installed during building the project and config is imported over it. When there are many changes in the config, you can re-build the project and directly create a new dump and replace it again." />
+              </then>
+              <else>
+                <property name="db" value="${base.db}" />
+                <property name="db_name" value="/build/db/base.sql.gz" />
+              </else>
+            </if>
+          </else>
+        </if>
+      </then>
+    </if>
+
+    <echo message="Emptying current database..." />
+    <exec command="${drush} --root=${dir.web} sql-drop -y" passthru="true" checkreturn="true" />
+
+    <echo message="Importing database using ${db_name}..." />
+    <exec command="gunzip &lt; ${db} | ${drush} --root=${dir.web} sql-cli" logoutput="true" passthru="true" checkreturn="true" />
+
+    <echo message="Default database import successful." />
+  </target>
+
+  <!-- Drupal updates -->
+  <target name="drupal-updates" hidden="true">
+    <if>
+      <istrue value="${update-database}" />
+      <then>
+        <echo message="Updating database..." />
+        <exec command="${drush} updb -y" dir="${dir.web}" logoutput="true" checkreturn="true" />
+      </then>
+    </if>
+  </target>
+
+  <!-- Drupal config -->
+  <target name="drupal-config-sync" hidden="true">
+    <echo message="Importing config..." />
+    <exec command="${drush} cim ${default.config} -y" dir="${dir.web}" logoutput="true" checkreturn="true" />
+  </target>
+
+  <!-- Drupal update translations -->
+  <target name="drupal-locale-update" hidden="true">
+    <echo message="Updating translations..." />
+    <!-- Drupal core + contrib translations -->
+    <exec command="${drush} locale-check" dir="${dir.web}" logoutput="true" checkreturn="true" />
+    <exec command="${drush} locale-update" dir="${dir.web}" logoutput="true" checkreturn="true" />
+    <if>
+      <available file="${translation.file}" type="file" />
+      <then>
+        <!-- Project specific translations -->
+        <exec command="${drush} language-import --langcode=nl --no-set-customized --no-replace-customized ${translation.file}" dir="${dir.web}" logoutput="true" checkreturn="true" />
+      </then>
+    </if>
+  </target>
+
+  <!-- Drupal cache -->
+  <target name="drupal-cache-rebuild" hidden="true">
+    <echo message="Rebuilding cache..." />
+    <exec command="${drush} cr" dir="${dir.web}" logoutput="true" checkreturn="true" />
+  </target>
+
+  <!-- ============================================  -->
+  <!-- Permissions setup                             -->
+  <!-- ============================================  -->
+  <target name="permissions">
+    <if>
+      <istrue value="${permissions}" />
+      <then>
+        <echo message="Setting file permissions..." />
+        <exec command="find . -type f -exec chmod 644 {} +" dir="${dir.web}" logoutput="true" />
+        <echo message="Setting directory permissions..." />
+        <exec command="find . -type d -exec chmod 755 {} +" dir="${dir.web}" logoutput="true" />
+        <echo message="Setting specific permissions..." />
+        <exec command="chmod 440 ${dir.default}/settings.php ${dir.default}/settings.local.php ${dir.default}/services.yml" logoutput="true" />
+        <exec command="chmod 770 ${dir.default}" logoutput="true" />
+        <mkdir dir="${dir.files}/translations" />
+        <exec command="chmod 775 ${dir.files}/translations" logoutput="true" />
+        <if>
+          <available file="${dir.keys}" type="dir" property="checked.keys" />
+          <then>
+            <exec command="find . -type f -exec chmod 600 {} +" dir="${dir.keys}" logoutput="true" />
+          </then>
+        </if>
+        <echo message="Finished setting up permissions." />
+      </then>
+    </if>
+  </target>
+
+  <!-- ============================================  -->
+  <!-- Tests                                         -->
+  <!-- ============================================  -->
+  <target name="test">
+    <echo message="Performing tests..." />
+    <phingcall target="test-coding-standards" />
+    <phingcall target="test-php-stan" />
+  </target>
+
+  <!-- Test if coding standards are met -->
+  <target name="test-coding-standards"
+          description="Check custom PHP files for coding standards"
+          hidden="true">
+    <echo message="Check custom PHP files for coding standards" />
+    <!-- Scan all extensions, but ignore contrib files -->
+    <exec command="${dir.bin}/phpcs --config-set installed_paths ${dir.vendor}/drupal/coder/coder_sniffer,${dir.vendor}/slevomat/coding-standard" />
+    <exec command="${dir.bin}/phpcs --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --ignore=*.css --extensions=php,module,install,inc,profile,theme,yml ${dir.modules}" logoutput="true" checkreturn="true" />
+    <exec command="${dir.bin}/phpcs --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --ignore=*.css --extensions=php,module,install,inc,profile,theme,yml ${dir.themes}" logoutput="true" checkreturn="true" />
+    <exec command="${dir.bin}/phpcs --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --ignore=*.css --extensions=php,module,install,inc,profile,theme,yml ${dir.profiles}" logoutput="true" checkreturn="true" />
+  </target>
+
+  <!-- Automatically fix coding standards -->
+  <target name="fix-cs"
+          description="Fix coding standard issues that can be fixed automatically"
+          hidden="true">
+    <echo message="Check custom PHP files for coding standards that can be applied automatically" />
+    <!-- Scan all extensions, but ignore contrib files -->
+    <exec command="${dir.bin}/phpcbf --config-set installed_paths ${dir.vendor}/drupal/coder/coder_sniffer,${dir.vendor}/slevomat/coding-standard" />
+    <exec command="${dir.bin}/phpcbf --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --extensions=php,module,install,inc,profile,theme,yml ${dir.modules}" logoutput="true" checkreturn="true" />
+    <exec command="${dir.bin}/phpcbf --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --extensions=php,module,install,inc,profile,theme,yml ${dir.themes}" logoutput="true" checkreturn="true" />
+    <exec command="${dir.bin}/phpcbf --report=full --standard=Drupal,DrupalPractice --ignore=*/contrib/* --extensions=php,module,install,inc,profile,theme,yml ${dir.profiles}" logoutput="true" checkreturn="true" />
+  </target>
+
+  <!-- Test if PHP Static Analysis throws errors -->
+  <target name="test-php-stan"
+          description="Check custom PHP files for PHP Static Analysis"
+          hidden="true">
+    <if>
+      <available file='${dir.bin}/phpstan' type='file' />
+      <then>
+        <echo message="Check custom PHP files for PHP Static Analysis" />
+        <!-- Scan all extensions, but ignore contrib files -->
+        <exec command="${dir.bin}/phpstan analyse --memory-limit=512M ${dir.modules}" logoutput="true" passthru="true" checkreturn="true" />
+        <exec command="${dir.bin}/phpstan analyse --memory-limit=512M ${dir.themes}" logoutput="true" passthru="true" checkreturn="true" />
+        <exec command="${dir.bin}/phpstan analyse --memory-limit=512M ${dir.profiles}" logoutput="true" passthru="true" checkreturn="true" />
+      </then>
+      <else>
+        <echo message="If you want to use Phpstan, please install the required packages." />
+      </else>
+    </if>
+  </target>
+
+</project>

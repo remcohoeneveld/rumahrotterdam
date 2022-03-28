@@ -1,0 +1,8 @@
+uuid: 5e449907-3fd1-415e-88b2-34222f35ae5d
+langcode: en
+status: true
+dependencies: {  }
+id: content_section
+label: 'Content section'
+revision: 0
+description: 'Adds content sections to the site.'

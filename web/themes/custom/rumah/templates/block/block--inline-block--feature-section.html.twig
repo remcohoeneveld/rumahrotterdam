@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {% set feature_type = content.field_feature_type.0|render %}
+    {% if feature_type == 'with_feature_list' %}
+      {% include directory ~ "/partials/feature/partial--feature-with-feature-list.html.twig" %}
+    {% elseif feature_type == 'with_feature_grid_list' %}
+      {% include directory ~ "/partials/feature/partial--feature-with-feature-grid-list.html.twig" %}
+    {% elseif feature_type == 'grid_with_offset_icons' %}
+      {% include directory ~ "/partials/feature/partial--feature-grid-with-offset-icons.html.twig" %}
+    {% elseif feature_type == '4_2_grid_on_brand' %}
+      {% include directory ~ "/partials/feature/partial--feature-4-2-on-brand.html.twig" %}
+    {% endif %}
+  {% endblock %}
+</div>

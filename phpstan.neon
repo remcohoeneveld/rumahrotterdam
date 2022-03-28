@@ -1,0 +1,24 @@
+includes:
+    - vendor/mglaman/phpstan-drupal/extension.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+services:
+    -
+        class: mglaman\PHPStanDrupal\Rules\Drupal\PluginManager\PluginManagerSetsCacheBackendRule
+        tags:
+            - phpstan.rules.rule
+parameters:
+    level: max
+    customRulesetUsed: true
+    reportUnmatchedIgnoredErrors: false
+    # For now we don't want iterable value type hints, until every project is on
+    # PHP 7.3 or higher.
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Parameter [\#0-9]{0,} [\$plugin_definition]{0,} of class [a-zA-Z\\_]{0,} constructor expects string, mixed given.#'
+    excludePaths:
+        # Ignore contrib modules/themes/profiles.
+        - */contrib/*
+        # Ignore test files.
+        - *Test.php
+        - *TestBase.php

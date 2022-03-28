@@ -1,0 +1,8 @@
+uuid: ca9e8ede-862b-4cdf-bf56-1396f7caf68f
+langcode: en
+status: true
+dependencies: {  }
+id: cta_section
+label: 'CTA section'
+revision: 0
+description: 'Feature sections can be used in different configurations.'

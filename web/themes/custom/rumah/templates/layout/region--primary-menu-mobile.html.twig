@@ -1,0 +1,8 @@
+<!-- Mobile menu, show/hide based on menu state. -->
+{% if content %}
+  <div class="sm:hidden" id="mobile-menu" style="display: none">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+        {{ content }}
+    </div>
+  </div>
+{% endif %}

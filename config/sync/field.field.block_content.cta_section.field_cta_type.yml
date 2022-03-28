@@ -1,0 +1,23 @@
+uuid: 3339a1aa-343d-42e0-89f0-0daa0c66bf15
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.cta_section
+    - field.storage.block_content.field_cta_type
+  module:
+    - options
+id: block_content.cta_section.field_cta_type
+field_name: field_cta_type
+entity_type: block_content
+bundle: cta_section
+label: 'CTA type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: simple_centered
+default_value_callback: ''
+settings: {  }
+field_type: list_string

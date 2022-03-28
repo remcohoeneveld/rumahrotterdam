@@ -1,0 +1,8 @@
+uuid: 651b7837-acc5-456d-b9cb-7a91b1feb7d4
+langcode: en
+status: true
+dependencies: {  }
+id: hero_angled_image_on_right
+label: 'Hero section'
+revision: 0
+description: 'The hero sections, can be used in different configurations.'

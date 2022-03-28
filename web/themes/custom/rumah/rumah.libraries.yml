@@ -1,0 +1,11 @@
+global-styling:
+  css:
+    base:
+      dist/tailwind.css: {}
+  js:
+    js/navbar.js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupal.ajax

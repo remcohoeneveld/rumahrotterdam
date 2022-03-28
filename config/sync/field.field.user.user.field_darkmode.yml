@@ -1,0 +1,24 @@
+uuid: c81b0c0c-59f4-446e-a5e3-6e19ea01eb43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_darkmode
+  module:
+    - user
+id: user.user.field_darkmode
+field_name: field_darkmode
+entity_type: user
+bundle: user
+label: 'Turn darkmode off'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Off'
+  off_label: 'On'
+field_type: boolean

@@ -1,0 +1,131 @@
+{
+    "name": "drupal-composer/drupal-project",
+    "description": "Project template for Drupal 9 projects with Composer",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "",
+            "role": ""
+        }
+    ],
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/better_exposed_filters": "^5.0",
+        "drupal/better_login_form_config": "^2.4",
+        "drupal/betterlogin": "^1.6",
+        "drupal/block_exclude_pages": "^2.0",
+        "drupal/bootstrap": "^3.23",
+        "drupal/bootstrap_layout_builder": "^2.0",
+        "drupal/captcha": "^1.2",
+        "drupal/console": "~1.0",
+        "drupal/core-composer-scaffold": "^9.3",
+        "drupal/core-recommended": "^9.3",
+        "drupal/domain": "^1.0@beta",
+        "drupal/entity_browser": "^2.6",
+        "drupal/environment_indicator": "^4.0",
+        "drupal/field_group": "^3.2",
+        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/jquery_ui_accordion": "^1.1",
+        "drupal/mailsystem": "^4.3",
+        "drupal/metatag": "^1.18",
+        "drupal/paragraphs": "^1.12",
+        "drupal/pathauto": "^1.8",
+        "drupal/recaptcha": "^3.0",
+        "drupal/redirect": "^1.7",
+        "drupal/remove_username": "^1.1",
+        "drupal/search_api": "^1.21",
+        "drupal/simple_sitemap": "^4.0",
+        "drupal/svg_image": "^1.15",
+        "drupal/tailwindcss": "^5.0@alpha",
+        "drupal/twig_tweak": "^3.1",
+        "drupal/vapn": "^1.5",
+        "drupal/video_embed_field": "^2.4",
+        "drupal/video_embed_spotify": "^1.5",
+        "drupal/webform": "^6.1",
+        "drush/drush": "^10.6",
+        "vlucas/phpdotenv": "^5.1",
+        "webflo/drupal-finder": "^1.2"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^9.3",
+        "mglaman/phpstan-drupal": "^1.1.4",
+        "phpspec/prophecy-phpunit": "^2",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.1",
+        "zaporylie/composer-drupal-optimizations": "^1.2"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "discard-changes": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ],
+        "files": ["load.environment.php"]
+    },
+    "scripts": {
+        "pre-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ]
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
+        },
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/core": {
+                "excape colon otherwise styling wont work for tailwind": "https://www.drupal.org/files/issues/2019-04-22/allow_colons_css_identifiers-3050007-2.patch"
+            },
+            "drupal/paragraphs": {
+                "\nIntegrity constraint violation: 1048 Column 'langcode' cannot be null\n": "https://www.drupal.org/files/issues/paragraphs-missing-langcode-2901390-3.patch"
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ */
+#}
+{% set classes = [
+  'container',
+  'mx-auto'
+] %}
+<article{{ attributes.addClass(classes) }}>
+  {% if content %}
+
+    <div class="bg-white dark:bg-black overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">{{ "User
+        information"|t }}</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-rumah-600">{{ "Personal details"|t }}</p>
+      </div>
+      <div class="border-t border-gray-200 dark:border-rumah-800 px-4 py-5 sm:p-0">
+        <dl class="sm:divide-y sm:divide-gray-200 dark:sm:divide-rumah-800">
+          {% if content.field_firstname.0 and content.field_lastname.0 %}
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium dark:text-white text-gray-500">{{ "Full name"|t }}</dt>
+              <dd class="mt-1 text-sm dark:text-white text-gray-900 sm:mt-0 sm:col-span-2">{{ content.field_firstname.0 }} {{ content.field_lastname.0 }}</dd>
+            </div>
+          {% endif %}
+          {% if content.field_job_title.0 %}
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm dark:text-white font-medium text-gray-500">{{ 'Job title'|t }}</dt>
+            <dd class="mt-1 text-sm dark:text-white  text-gray-900 sm:mt-0 sm:col-span-2">
+              {{ content.field_job_title }}</dd>
+          </div>
+          {% endif %}
+          {% if content.email %}
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm dark:text-white  font-medium text-gray-500">{{ 'Email address'|t }}</dt>
+            <dd class="mt-1 text-sm dark:text-white  text-gray-900 sm:mt-0 sm:col-span-2">
+              {{ content.email }}</dd>
+          </div>
+          {% endif %}
+          {% if content.subscription %}
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm dark:text-white font-medium text-gray-500">{{ 'Subscription'|t }}</dt>
+              <dd class="mt-1 text-sm dark:text-white text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ content.subscription }}</dd>
+            </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
+  {% endif %}
+</article>

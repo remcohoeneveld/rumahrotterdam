@@ -1,0 +1,23 @@
+uuid: 47f4d84d-9d9a-4410-a93c-1e9c118a061d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+    - field.storage.block_content.field_hero_type
+  module:
+    - options
+id: block_content.hero_angled_image_on_right.field_hero_type
+field_name: field_hero_type
+entity_type: block_content
+bundle: hero_angled_image_on_right
+label: 'Hero Type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: angled_image_on_right
+default_value_callback: ''
+settings: {  }
+field_type: list_string

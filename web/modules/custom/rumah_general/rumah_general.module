@@ -1,0 +1,200 @@
+<?php
+
+/**
+ * @file
+ * The rumah general module.
+ */
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\stripe_registration\Entity\StripePlanEntity;
+use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function rumah_general_entity_extra_field_info(): array {
+  $fields = [];
+  $fields['user']['user']['display']['subscription'] = [
+    'label' => t('Subscription'),
+    'description' => t('User subscription view element.'),
+    'weight' => 5,
+  ];
+
+  $fields['user']['user']['display']['email'] = [
+    'label' => t('Email'),
+    'description' => t('Show the user email.'),
+    'weight' => 5,
+  ];
+
+  return $fields;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rumah_general_theme(): array {
+  $theme = [];
+  $theme[] = [
+    'user-item' => [
+      'variables' => [
+        'title' => NULL,
+        'items' => [],
+      ],
+    ],
+  ];
+  $theme['page__user__login'] = [
+    'preprocess functions' => ['rumah_general_preprocess_betterlogin'],
+  ];
+  $theme['page__user__register'] = [
+    'preprocess functions' => ['rumah_general_preprocess_betterlogin'],
+  ];
+  $theme['page__user__password'] = [
+    'preprocess functions' => ['rumah_general_preprocess_betterlogin'],
+  ];
+  $theme['page__user__reset'] = [
+    'preprocess functions' => ['rumah_general_preprocess_betterlogin'],
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_general_preprocess_betterlogin(array &$variables): void {
+  $logo = theme_get_setting('logo.url');
+  $variables['site_logo'] = '';
+  if ($logo !== "") {
+    $variables['site_logo'] = str_replace('.svg', '.jpg', $logo);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function rumah_general_user_view(array &$build, UserInterface $account, EntityViewDisplayInterface $display): void {
+  if (is_array($display->getComponent('subscription'))) {
+    $rids = $account->getRoles(TRUE);
+    $roles = array_intersect_key(user_role_names(), array_flip($rids));
+    $build['subscription']['#markup'] = implode(', ', $roles);
+  }
+  if (is_array($display->getComponent('email'))) {
+    $build['email']['#markup'] = $account->getEmail();
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_general_preprocess_stripe_subscribe(array &$variables): void {
+  if (
+    !isset($variables["plan_entity"]) ||
+    !$variables["plan_entity"] instanceof StripePlanEntity
+  ) {
+    return;
+  }
+
+  $stripe_plan = $variables["plan_entity"];
+
+  if (
+    $stripe_plan->hasField('field_features') &&
+    !$stripe_plan->get('field_features')->isEmpty()
+  ) {
+    $variables['features'] = $stripe_plan->get('field_features')->value;
+  }
+
+  if (
+    $stripe_plan->hasField('field_price') &&
+    !$stripe_plan->get('field_price')->isEmpty()
+  ) {
+    $variables['price'] = $variables["plan_entity"]->get('field_price')->value;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function rumah_general_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $user = _rumah_general_get_user();
+
+  $hidden_anon_fields = ['user_picture', 'field_darkmode'];
+
+  // Hide fields as anonymous.
+  foreach ($hidden_anon_fields as $field) {
+    if (!isset($form[$field])) {
+      continue;
+    }
+    $form[$field]['#access'] = FALSE;
+  }
+
+  if ($user instanceof User && $user->isAuthenticated()) {
+    // Show fields as authenticated.
+    foreach ($hidden_anon_fields as $field) {
+      if (!isset($form[$field])) {
+        continue;
+      }
+      $form[$field]['#access'] = TRUE;
+    }
+  }
+
+  if ($form_id === 'user_form' && $form["#id"] === 'user-form') {
+    $form['#prefix'] = '<div class="user-profile-edit"><h1 class="page-header">' . t('Edit profile')->render() . '</h1>';
+    $form['#suffix'] = '</div>';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function rumah_general_preprocess_block(array &$variables): void {
+  if ($variables["plugin_id"] === 'system_menu_block:account') {
+    $user = _rumah_general_get_user();
+    if (
+      $user instanceof User &&
+      $user->hasField('user_picture') &&
+      !$user->get('user_picture')->isEmpty()
+    ) {
+      $file = $user->get('user_picture')->entity;
+
+      if ($file instanceof File) {
+        $image_uri = $file->getFileUri();
+        $variables['user_image'] = \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function rumah_general_menu_local_tasks_alter(array &$data, string $route_name, RefinableCacheableDependencyInterface &$cacheability): void {
+  if (isset($data["tabs"][0]["entity.user.canonical"])) {
+    $data["tabs"][0]["entity.user.canonical"]['#attributes']['link_type'] = 'dashboard';
+    $data["tabs"][0]["entity.user.canonical"]['#link']['title'] = t('Dashboard')->render();
+  }
+  if (isset($data["tabs"][0]["entity.user.edit_form"])) {
+    $data["tabs"][0]["entity.user.edit_form"]['#attributes']['link_type'] = 'edit_form';
+    $data["tabs"][0]["entity.user.edit_form"]['#link']['title'] = t('Edit profile')->render();
+  }
+}
+
+/**
+ * Get the current user.
+ *
+ * @return \Drupal\user\Entity\User|false
+ *   Get the user.
+ */
+function _rumah_general_get_user() {
+  $user = \Drupal::service('entity_type.manager')->getStorage('user')->load(
+    \Drupal::currentUser()->id()
+  );
+
+  if ($user instanceof User) {
+    return $user;
+  }
+
+  return FALSE;
+}

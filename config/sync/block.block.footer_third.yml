@@ -1,0 +1,25 @@
+uuid: 2f33c180-46be-4479-b120-64305c5e1219
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-third
+  module:
+    - system
+  theme:
+    - rumah
+id: footer_third
+theme: rumah
+region: footer
+weight: -5
+provider: null
+plugin: 'system_menu_block:footer-third'
+settings:
+  id: 'system_menu_block:footer-third'
+  label: Company
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

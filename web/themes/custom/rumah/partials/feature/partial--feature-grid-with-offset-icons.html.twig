@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a feature block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="relative bg-white dark:bg-black py-16 sm:py-24 lg:py-32">
+  <div class="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+    <h2 class="text-base font-semibold tracking-wider text-rumah-600 uppercase">
+      {{ content.field_title.0 }}</h2>
+    <p class="mt-2 text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight sm:text-4xl">
+      {{ content.field_subtitle.0 }}</p>
+    <p class="mt-5 max-w-prose mx-auto text-xl text-gray-500 dark:text-gray-400">{{ content.body|render|striptags }}</p>
+    <div class="mt-12">
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {{ content.field_content }}
+      </div>
+    </div>
+  </div>
+</div>

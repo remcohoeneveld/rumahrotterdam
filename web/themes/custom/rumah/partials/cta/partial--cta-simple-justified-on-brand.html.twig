@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a cta block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="bg-black dark:bg-rumah-50">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between">
+    <h2 class="text-3xl font-extrabold tracking-tight text-white dark:text-black md:text-4xl">
+      {% if content.field_title.0 %}
+      <span class="block">{{ content.field_title.0 }}</span>
+      {% endif %}
+      {% if content.field_subtitle.0 %}
+        <span class="block text-rumah-600">{{ content.field_subtitle.0 }}</span>
+      {% endif %}
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      {% if content.field_link_left.0 %}
+        <div class="inline-flex rounded-md shadow">
+          <a href="{{ content.field_link_left[0]['#url']|render }}" class="inline-flex mr-2 items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rumah-600 hover:bg-rumah-700">{{ content.field_link_left[0]['#title']|render }}</a>
+        </div>
+      {% endif %}
+      {% if content.field_link_right.0 %}
+        <div class="inline-flex rounded-md shadow">
+          <a href="{{ content.field_link_right[0]['#url']|render }}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rumah-600 hover:bg-rumah-700">{{ content.field_link_right[0]['#title']|render }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

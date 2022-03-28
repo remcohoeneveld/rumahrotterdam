@@ -1,0 +1,23 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for tabs.
+ */
+#}
+{% block content %}
+  {% if content %}
+    <div class="sm:hidden mx-auto px-6">
+      <label for="tabs" class="sr-only">Select a tab</label>
+      <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+      <nav id="tabs" name="tabs" class="mb-px flex space-x-4 flex-row flex-wrap">
+        {{ content }}
+      </nav>
+    </div>
+    <div class="hidden sm:block max-w-7xl mx-auto">
+      <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        {{ content }}
+      </nav>
+    </div>
+  {% endif %}
+{% endblock %}

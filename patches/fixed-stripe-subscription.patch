@@ -1,0 +1,101 @@
+diff --git a/src/Controller/UserSubscriptionsController.php b/src/Controller/UserSubscriptionsController.php
+index 8e47401..b717833 100644
+--- a/src/Controller/UserSubscriptionsController.php
++++ b/src/Controller/UserSubscriptionsController.php
+@@ -80,7 +80,7 @@ class UserSubscriptionsController extends ControllerBase {
+    * @see \Drupal\stripe_registration\Plugin\Menu\SubscribeMenuLink::getTitle()
+    */
+   public function subscribeTitle() {
+-    if ($this->stripeRegistration->userHasStripeSubscription($this->currentUser())) {
++    if ($this->stripeRegistration->userHasStripeSubscription()) {
+       return 'Upgrade';
+     }
+     return 'Subscribe';
+@@ -111,7 +111,7 @@ class UserSubscriptionsController extends ControllerBase {
+         '#remote_plan' => $plan,
+         '#plan_entity' => $this->stripeRegistration->loadLocalPlan(['plan_price_id' => $plan->id]),
+         // @tode Check $subscription->cancel_at_period_end.
+-        '#current_user_subscribes_to_any_plan' => $this->stripeRegistration->userHasStripeSubscription($user),
++        '#current_user_subscribes_to_any_plan' => $this->stripeRegistration->userHasStripeSubscription(),
+         // @tode Check $subscription->cancel_at_period_end.
+         '#current_user_subscribes_to_this_plan' => $this->userIsSubscribedToPlan($user, $plan),
+         '#attached' => [
+@@ -220,7 +220,7 @@ class UserSubscriptionsController extends ControllerBase {
+    */
+   public function manageSubscriptionsAccess($user) {
+     return AccessResult::allowedIf(
+-      $this->stripeRegistration->userHasStripeSubscription(User::load($user))
++      $this->stripeRegistration->userHasStripeSubscription()
+     );
+   }
+ 
+@@ -262,7 +262,7 @@ class UserSubscriptionsController extends ControllerBase {
+    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+    */
+   protected function userIsSubscribedToPlan($user, Plan $plan): bool {
+-    if ($this->stripeRegistration->userHasStripeSubscription($user)) {
++    if ($this->stripeRegistration->userHasStripeSubscription()) {
+       $subscription = $this->stripeRegistration->loadLocalSubscription([
+         'user_id' => $this->currentUser->id(),
+       ]);
+diff --git a/src/Plugin/Menu/SubscribeMenuLink.php b/src/Plugin/Menu/SubscribeMenuLink.php
+index d582dbf..a70ee37 100644
+--- a/src/Plugin/Menu/SubscribeMenuLink.php
++++ b/src/Plugin/Menu/SubscribeMenuLink.php
+@@ -13,8 +13,7 @@ class SubscribeMenuLink extends MenuLinkDefault {
+    */
+   public function getTitle() {
+     $stripe_registration = \Drupal::service('stripe_registration.stripe_api');
+-    $current_user = \Drupal::service('current_user');
+-    if ($stripe_registration->userHasStripeSubscription($current_user)) {
++    if ($stripe_registration->userHasStripeSubscription()) {
+       return 'Upgrade';
+     }
+     return 'Subscribe';
+diff --git a/src/StripeRegistrationService.php b/src/StripeRegistrationService.php
+index dad549e..47f0ddb 100644
+--- a/src/StripeRegistrationService.php
++++ b/src/StripeRegistrationService.php
+@@ -70,17 +70,15 @@ class StripeRegistrationService {
+   /**
+    * Check if a given user has a stripe subscription.
+    *
+-   * @param \Drupal\user\UserInterface|\Drupal\Core\Session\AccountInterface $user
+-   *   The user.
+-   *
+    * @return bool
+    *  TRUE if the user has a subscription.
+    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+    */
+-  public function userHasStripeSubscription($user): bool {
++  public function userHasStripeSubscription(): bool {
++    $current_user = \Drupal::service('current_user');
+     $subscription = $this->loadLocalSubscription([
+-      'user_id' => $user->id(),
++      'user_id' => $current_user->id(),
+     ]);
+ 
+     return (bool) $subscription;
+diff --git a/stripe_registration.module b/stripe_registration.module
+index 9bf8551..1726700 100644
+--- a/stripe_registration.module
++++ b/stripe_registration.module
+@@ -152,7 +152,7 @@ function stripe_registration_user_login_submit(&$form, FormStateInterface $form_
+   if ($config->get('redirect')) {
+     /** @var StripeRegistrationService $stripe_registration */
+     $stripe_registration =  \Drupal::service('stripe_registration.stripe_api');
+-    if (!$stripe_registration->userHasStripeSubscription($account)
++    if (!$stripe_registration->userHasStripeSubscription()
+     ) {
+       $request = \Drupal::service('request_stack')->getCurrentRequest();
+       if (!$request->request->has('destination')) {
+@@ -180,7 +180,7 @@ function stripe_registration_user_register_form_submit($form, FormStateInterface
+   if ($config->get('redirect')) {
+     /** @var StripeRegistrationService $stripe_registration */
+     $stripe_registration =  \Drupal::service('stripe_registration.stripe_api');
+-    if (!$stripe_registration->userHasStripeSubscription($account)
++    if (!$stripe_registration->userHasStripeSubscription()
+     ) {
+       $request = \Drupal::service('request_stack')->getCurrentRequest();
+       if (!$request->request->has('destination')) {

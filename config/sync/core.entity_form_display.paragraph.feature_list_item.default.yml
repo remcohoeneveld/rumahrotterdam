@@ -1,0 +1,43 @@
+uuid: d5c8ea4a-456e-4633-a9b9-b3c6b7828eef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.feature_list_item.field_description
+    - field.field.paragraph.feature_list_item.field_logo_icon
+    - field.field.paragraph.feature_list_item.field_title
+    - paragraphs.paragraphs_type.feature_list_item
+  module:
+    - media_library
+    - text
+id: paragraph.feature_list_item.default
+targetEntityType: paragraph
+bundle: feature_list_item
+mode: default
+content:
+  field_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_logo_icon:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

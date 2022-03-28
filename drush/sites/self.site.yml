@@ -1,0 +1,8 @@
+# Edit or remove this file as needed.
+# Docs at https://github.com/drush-ops/drush/blob/master/examples/example.site.yml
+
+#stage:
+#  host: stage.domain.com
+#  user: www-admin
+#  root: /path/to/drupal
+#  uri: http://stage.example.com

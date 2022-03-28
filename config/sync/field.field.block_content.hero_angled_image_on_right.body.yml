@@ -1,0 +1,23 @@
+uuid: 465db65b-5f84-47e7-b3ab-03f049423d9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.hero_angled_image_on_right
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.hero_angled_image_on_right.body
+field_name: body
+entity_type: block_content
+bundle: hero_angled_image_on_right
+label: Body
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

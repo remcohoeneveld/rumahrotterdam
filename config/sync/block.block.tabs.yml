@@ -1,0 +1,26 @@
+uuid: ac55f1a2-0f3c-4be5-92c5-74fffb2635bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rumah
+id: tabs
+theme: rumah
+region: secondary_menu
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/user/*\r\n/user"

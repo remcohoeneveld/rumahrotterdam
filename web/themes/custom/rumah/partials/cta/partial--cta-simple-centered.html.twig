@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a cta block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="bg-white dark:bg-black">
+  <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+      <span class="block">{{ content.field_title.0 }}</span>
+      <span class="block">{{ content.field_subtitle.0 }}</span>
+    </h2>
+    <div class="mt-8 flex justify-center">
+      {% if content.field_link_left.0 %}
+        <div class="inline-flex rounded-md shadow">
+          <a href="{{ content.field_link_left[0]['#url']|render }}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rumah-600 hover:bg-rumah-700">{{ content.field_link_left[0]['#title']|render }}</a>
+        </div>
+      {% endif %}
+      {% if content.field_link_right.0 %}
+        <div class="ml-3 inline-flex">
+          <a href="{{ content.field_link_right[0]['#url']|render }}" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-rumah-700 bg-rumah-100 hover:bg-rumah-200">{{ content.field_link_right[0]['#title']|render }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

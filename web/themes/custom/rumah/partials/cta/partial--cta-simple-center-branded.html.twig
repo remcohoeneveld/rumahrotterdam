@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Default theme implementation of a cta block.
+ *
+ * Available variables:
+ * - content
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="bg-rumah-700">
+  <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+      <span class="block">{{ content.field_title.0 }}</span>
+      <span class="block">{{ content.field_subtitle.0 }}</span>
+    </h2>
+    <p class="mt-4 text-lg leading-6 text-rumah-200">{{ content.body|render|striptags }}</p>
+    {% if content.field_link_left.0 %}
+      <a href="{{ content.field_link_left[0]['#url']|render }}" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-rumah-600 bg-white hover:bg-rumah-50 sm:w-auto">{{ content.field_link_left[0]['#title']|render }}</a>
+    {% endif %}
+    {% if content.field_link_right.0 %}
+      <a href="{{ content.field_link_right[0]['#url']|render }}" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-rumah-600 bg-black hover:bg-rumah-800 sm:w-auto">{{ content.field_link_right[0]['#title']|render }}</a>
+    {% endif %}
+  </div>
+</div>
