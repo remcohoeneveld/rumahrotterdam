@@ -1,0 +1,33 @@
+uuid: 8e93eba9-b625-4dfe-a68a-5adac0bf244f
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_category_type
+field_name: field_category_type
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: one_big_two_small
+      label: 'One big two small'
+    -
+      value: three_on_row
+      label: 'Three on row'
+    -
+      value: three_on_row_with_background
+      label: 'Three on row with background'
+    -
+      value: five_on_row
+      label: 'Five on a row'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

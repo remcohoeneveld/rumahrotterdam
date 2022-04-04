@@ -7,6 +7,7 @@
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\stripe_registration\Entity\StripePlanEntity;
 use Drupal\user\Entity\User;
@@ -165,6 +166,24 @@ function rumah_general_preprocess_block(array &$variables): void {
       }
     }
   }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function rumah_entity_presave(EntityInterface $entity): void {
+
+  // Fix langcode is empty when you use entity browser x inline entity form.
+  if ($entity->getEntityType()->id() === 'paragraph') {
+    $langcode_key = $entity->getEntityType()->getKey('langcode');
+    if (is_string($langcode_key) && $langcode_key !== '') {
+      $lang_value = $entity->get($langcode_key)->getLangcode();
+      if (is_string($lang_value) && $lang_value !== '') {
+        $entity->set($langcode_key, $lang_value);
+      }
+    }
+  }
+
 }
 
 /**

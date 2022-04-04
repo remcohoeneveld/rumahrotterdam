@@ -1,0 +1,23 @@
+uuid: d1ecee05-46d3-42eb-aab5-8379919e3960
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.category_section
+    - field.storage.block_content.field_category_type
+  module:
+    - options
+id: block_content.category_section.field_category_type
+field_name: field_category_type
+entity_type: block_content
+bundle: category_section
+label: 'Category type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: one_big_two_small
+default_value_callback: ''
+settings: {  }
+field_type: list_string

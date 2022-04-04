@@ -1,0 +1,10 @@
+uuid: 0f2bc437-dc78-40bb-98d7-3f55b5f1a621
+langcode: en
+status: true
+dependencies: {  }
+id: category_item
+label: 'Category item'
+icon_uuid: null
+icon_default: null
+description: 'Adds category item to the block.'
+behavior_plugins: {  }

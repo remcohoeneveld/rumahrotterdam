@@ -15,5 +15,8 @@
   "version": "1.0.0",
   "main": "tailwind.config.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.0"
+  }
 }

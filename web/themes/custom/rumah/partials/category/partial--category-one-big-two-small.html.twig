@@ -1,0 +1,57 @@
+<!-- Category section -->
+<section aria-labelledby="category-heading" class="bg-gray-50">
+  <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-baseline sm:justify-between">
+      <h2 id="category-heading" class="text-2xl font-extrabold tracking-tight text-gray-900">
+        {{ label }}</h2>
+      {% if content.field_link.0 %}
+        <a href="{{ content.field_link[0]['#url']|render }}" class="hidden text-sm font-semibold text-rumah-600 hover:text-rumah-500 sm:block">{{ content.field_link[0]['#title']|render }}<span aria-hidden="true"> &rarr;</span></a>
+      {% endif %}
+    </div>
+
+    {% if content.field_category_items.0 %}
+    <div class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
+      {% for key, item in content.field_category_items if key|first != '#'%}
+        {% if loop.first %}
+          <div class="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
+            <img src="{{ file_url(item['#paragraph'].field_image.entity.field_media_image.entity.fileuri)  }}" alt="paragraph image" class="object-center object-cover group-hover:opacity-75">
+            <div aria-hidden="true" class="bg-gradient-to-b from-transparent to-black opacity-50"></div>
+            <div class="p-6 flex items-end">
+              <div>
+                <h3 class="font-semibold text-white">
+                  <a href="{{ item['#paragraph'].field_link[0].uri|raw }}">
+                    <span class="absolute inset-0"></span>
+                    {{ item['#paragraph'].field_title[0].value|raw }}
+                  </a>
+                </h3>
+                <p aria-hidden="true" class="mt-1 text-sm text-white">{{ item['#paragraph'].field_subtitle[0].value|raw }}</p>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="group aspect-w-2 aspect-h-1 rounded-lg overflow-hidden sm:relative sm:aspect-none sm:h-full">
+            <img src="{{ file_url(item['#paragraph'].field_image.entity.field_media_image.entity.fileuri)  }}" alt="paragraph image" class="object-center object-cover group-hover:opacity-75 sm:absolute sm:inset-0 sm:w-full sm:h-full">
+            <div aria-hidden="true" class="bg-gradient-to-b from-transparent to-black opacity-50 sm:absolute sm:inset-0"></div>
+            <div class="p-6 flex items-end sm:absolute sm:inset-0">
+              <div>
+                <h3 class="font-semibold text-white">
+                  <a href="{{ item['#paragraph'].field_link[0].uri|raw }}">
+                    <span class="absolute inset-0"></span>
+                    {{ item['#paragraph'].field_title[0].value|raw }}
+                  </a>
+                </h3>
+                <p aria-hidden="true" class="mt-1 text-sm text-white"> {{ item['#paragraph'].field_subtitle[0].value|raw }}</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if content.field_link.0 %}
+      <div class="mt-6 sm:hidden">
+        <a href="{{ content.field_link[0]['#url']|render }}" class="block text-sm font-semibold text-rumah-600 hover:text-rumah-500">{{ content.field_link[0]['#title']|render }}<span aria-hidden="true"> &rarr;</span></a>
+      </div>
+    {% endif %}
+  </div>
+</section>

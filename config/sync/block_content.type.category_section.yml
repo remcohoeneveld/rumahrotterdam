@@ -1,0 +1,8 @@
+uuid: 9fb6febb-bd71-45bf-8186-764e89771484
+langcode: en
+status: true
+dependencies: {  }
+id: category_section
+label: 'Category section'
+revision: 0
+description: 'Adds category section to showcase categories by three at a time.'

@@ -45,6 +45,7 @@ module:
   key: 0
   language: 0
   layout_builder: 0
+  layout_builder_modal: 0
   layout_discovery: 0
   link: 0
   locale: 0
@@ -85,6 +86,7 @@ module:
   toolbar: 0
   tour: 0
   twig_tweak: 0
+  twig_xdebug: 0
   update: 0
   user: 0
   vapn: 0
