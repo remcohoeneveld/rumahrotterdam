@@ -34,11 +34,11 @@ We call a macro which calls itself to render the full tree.
         <li>
           {% if item.in_active_trail %}
             <a href="{{ item.url }}" class="text-base text-gray-300 hover:text-white">
-              {{ item.title }}
+              <img class="w-full h-full object-center object-cover p-4" src="{{  item.logo }}" alt="{{ 'award'|t }}" />
             </a>
           {% else %}
-            <a href="{{ item.url }}" class="text-base text-gray-300 hover:text-white">
-              {{ item.title }}
+            <a href="{{ item.url }}" class="text-base text-gray-300 hover:text-white ">
+              <img class="w-full h-full object-center object-cover p-4" src="{{ item.logo }}" alt="{{ 'award'|t }}" />
             </a>
           {% endif %}
         </li>

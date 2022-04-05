@@ -12,7 +12,7 @@ field_name: field_category_type
 entity_type: block_content
 bundle: category_section
 label: 'Category type'
-description: ''
+description: 'Choose a category template.'
 required: true
 translatable: false
 default_value:

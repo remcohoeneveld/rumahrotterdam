@@ -13,7 +13,7 @@ field_name: field_category_items
 entity_type: block_content
 bundle: category_section
 label: 'Category items'
-description: ''
+description: 'The category items that will be display on the block.'
 required: true
 translatable: false
 default_value: {  }

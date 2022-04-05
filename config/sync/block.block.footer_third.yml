@@ -10,13 +10,13 @@ dependencies:
     - rumah
 id: footer_third
 theme: rumah
-region: footer
+region: footer_second
 weight: -5
 provider: null
 plugin: 'system_menu_block:footer-third'
 settings:
   id: 'system_menu_block:footer-third'
-  label: Company
+  label: Socials
   label_display: visible
   provider: system
   level: 1

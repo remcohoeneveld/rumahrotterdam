@@ -15,6 +15,9 @@ settings:
       value: one_big_two_small
       label: 'One big two small'
     -
+      value: two_on_row
+      label: 'Two on row'
+    -
       value: three_on_row
       label: 'Three on row'
     -

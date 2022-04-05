@@ -10,13 +10,13 @@ dependencies:
     - rumah
 id: footer_second
 theme: rumah
-region: footer_second
-weight: -4
+region: footer
+weight: -5
 provider: null
 plugin: 'system_menu_block:footer-second'
 settings:
   id: 'system_menu_block:footer-second'
-  label: Support
+  label: Awards
   label_display: visible
   provider: system
   level: 1

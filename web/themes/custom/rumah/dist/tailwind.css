@@ -1515,15 +1515,6 @@ select {
   z-index: 10;
 }
 
-.m-0 {
-  margin: 0px;
-}
-
-.-my-2 {
-  margin-top: -0.5rem;
-  margin-bottom: -0.5rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1539,10 +1530,6 @@ select {
   margin-bottom: auto;
 }
 
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .mt-auto {
   margin-top: auto;
 }
@@ -1555,8 +1542,12 @@ select {
   margin-top: 0.25rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .-mt-96 {
@@ -1589,6 +1580,10 @@ select {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .-mb-20 {
@@ -1639,6 +1634,10 @@ select {
   margin-left: 1.5rem;
 }
 
+.mb-0 {
+  margin-bottom: 0px;
+}
+
 .mr-3 {
   margin-right: 0.75rem;
 }
@@ -1649,10 +1648,6 @@ select {
 
 .ml-9 {
   margin-left: 2.25rem;
-}
-
-.box-content {
-  box-sizing: content-box;
 }
 
 .block {
@@ -2029,10 +2024,6 @@ select {
   overflow: hidden;
 }
 
-.overflow-x-auto {
-  overflow-x: auto;
-}
-
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -2263,11 +2254,6 @@ select {
   padding-right: 1rem;
 }
 
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
@@ -2326,6 +2312,11 @@ select {
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .px-1 {
@@ -2848,14 +2839,14 @@ select {
   color: rgb(214 78 51 / var(--tw-text-opacity));
 }
 
+.hover\:text-rumah-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(178 60 36 / var(--tw-text-opacity));
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-700:hover {
@@ -2993,10 +2984,6 @@ select {
   color: rgb(178 60 36 / var(--tw-text-opacity));
 }
 
-.dark .dark\:hover\:rounded-md:hover {
-  border-radius: 0.375rem;
-}
-
 .dark .dark\:hover\:bg-rumah-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(178 60 36 / var(--tw-bg-opacity));
@@ -3116,6 +3103,10 @@ select {
 
   .sm\:mt-0 {
     margin-top: 0px;
+  }
+
+  .sm\:mb-8 {
+    margin-bottom: 2rem;
   }
 
   .sm\:mt-12 {
@@ -4006,10 +3997,6 @@ select {
     --tw-space-x-reverse: 0;
     margin-right: calc(0px * var(--tw-space-x-reverse));
     margin-left: calc(0px * calc(1 - var(--tw-space-x-reverse)));
-  }
-
-  .xl\:overflow-visible {
-    overflow: visible;
   }
 
   .xl\:px-8 {

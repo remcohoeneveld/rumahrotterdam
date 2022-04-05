@@ -11,10 +11,10 @@
     </div>
 
     {% if content.field_category_items.0 %}
-      <div class="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
+      <div class="mt-6 grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-y-0 sm:gap-x-6 lg:gap-x-8">
         {% for key, item in content.field_category_items if key|first != '#'%}
-          <div class="group relative">
-            <div class="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+          <div class="group relative sm:mb-8">
+            <div class="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 ">
               <img src="{{ file_url(item['#paragraph'].field_image.entity.field_media_image.entity.fileuri)  }}" alt="category image." class="w-full h-full object-center object-cover">
             </div>
             <h3 class="mt-4 text-base font-semibold text-gray-900">

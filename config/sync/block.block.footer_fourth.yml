@@ -11,12 +11,12 @@ dependencies:
 id: footer_fourth
 theme: rumah
 region: footer_second
-weight: -3
+weight: -4
 provider: null
 plugin: 'system_menu_block:footer-fourth'
 settings:
   id: 'system_menu_block:footer-fourth'
-  label: Legal
+  label: Extra
   label_display: visible
   provider: system
   level: 1
