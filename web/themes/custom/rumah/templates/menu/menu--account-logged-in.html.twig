@@ -30,7 +30,7 @@ We call a macro which calls itself to render the full tree.
     {% if items %}
       {% for item in items | children(true) %}
 
-        <a href="{{ item.url }}" class="mt-6 text-gray-500 dark:text-white hover:bg-rumah-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+        <a href="{{ item.url }}" class="mt-6 uppercase text-gray-500 dark:text-white hover:bg-rumah-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
           {{ item.title }}
         </a>
         {% if item.below %}

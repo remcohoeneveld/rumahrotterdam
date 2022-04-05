@@ -1,22 +1,23 @@
-uuid: d2f07809-b652-45a9-86d8-f79a6ee02d7a
+uuid: e425e71b-dcb5-4777-a6fc-ea072f75dd6b
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: course
-label: Course
+id: basic_content
+label: 'basic content'
 type: 'canonical_entities:node'
-pattern: '/course/[node:title]'
+pattern: '/pages/[node:title]'
 selection_criteria:
-  befb2006-554a-46aa-8f88-c7486f38e738:
+  77948ddf-2f54-4fc2-b294-9f3ead0c9ded:
     id: node_type
     negate: false
-    uuid: befb2006-554a-46aa-8f88-c7486f38e738
+    uuid: 77948ddf-2f54-4fc2-b294-9f3ead0c9ded
     context_mapping:
       node: node
     bundles:
-      courses: courses
+      landing_page: landing_page
+      page: page
 selection_logic: and
 weight: -5
 relationships: {  }
