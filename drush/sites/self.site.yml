@@ -1,6 +1,15 @@
 # Edit or remove this file as needed.
 # Docs at https://github.com/drush-ops/drush/blob/master/examples/example.site.yml
 
+prod:
+  host: therumahrotterdam.nl
+  user: deb105849
+  root: /home/deb105849/domains/therumahrotterdam.nl/public_html/web
+  uri: https://therumahrotterdam.nl
+  paths:
+    drush-script: '/home/deb105849/domains/therumahrotterdam.nl/public_html/vendor/bin/drush'
+    files: 'sites/default/files'
+
 #stage:
 #  host: stage.domain.com
 #  user: www-admin
