@@ -7,7 +7,7 @@ prod:
   root: /home/deb105849/domains/therumahrotterdam.nl/httpdocs/web
   uri: https://therumahrotterdam.nl
   paths:
-    drush-script: '/home/deb105849/domains/therumahrotterdam.nl/public_html/vendor/bin/drush'
+    drush-script: '/home/deb105849/domains/therumahrotterdam.nl/httpdocs/vendor/bin/drush'
     files: 'sites/default/files'
 
 #stage:

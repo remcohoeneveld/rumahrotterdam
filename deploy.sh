@@ -74,12 +74,12 @@ fi
 # Do environment specific tasks.
 if [ "$1" = "prod" ]; then
   # Example.
-  $DRUSH $PARAMETERS $ALIAS sset system.maintenance_mode 0
+  $DRUSH $PARAMETERS $ALIAS sset system.maintenance_mode 1
 fi
 
- Disable maintenance mode.
+# Disable maintenance mode.
 if [ "$maintenance_mode" = "y" ]; then
-  $DRUSH $PARAMETERS $ALIAS sset system.maintenance_mode 0
+  $DRUSH $PARAMETERS $ALIAS sset system.maintenance_mode 1
 fi
 
 echo "Done. Providing login:"
