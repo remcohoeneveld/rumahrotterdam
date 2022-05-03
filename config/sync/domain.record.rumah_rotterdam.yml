@@ -1,0 +1,11 @@
+uuid: 7428a3f2-198e-45a0-8547-b9ee098355f0
+langcode: en
+status: true
+dependencies: {  }
+id: rumah_rotterdam
+domain_id: 6523931
+hostname: therumahrotterdam.nl
+name: 'The Rumah'
+scheme: variable
+weight: 1
+is_default: true

@@ -6,7 +6,7 @@ PROJECT="therumahrotterdam"
 # Determine environment.
 if [ "$1" = "prod" ]; then
   ALIAS="@prod"
-  DOCROOT="/home/deb105849/domains/therumahrotterdam.nl/public_html/"
+  DOCROOT="/home/deb105849/domains/therumahrotterdam.nl/httpdocs/"
   echo "Deploying to production environment."
   HOST=deb105849@therumahrotterdam.nl
 else

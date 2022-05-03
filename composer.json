@@ -124,9 +124,6 @@
         "patches": {
             "drupal/core": {
                 "excape colon otherwise styling wont work for tailwind": "https://www.drupal.org/files/issues/2019-04-22/allow_colons_css_identifiers-3050007-2.patch"
-            },
-            "drupal/paragraphs": {
-                "\nIntegrity constraint violation: 1048 Column 'langcode' cannot be null\n": "https://www.drupal.org/files/issues/2022-02-28/paragraphs-2901390-103-withtests.patch"
             }
         }
     }

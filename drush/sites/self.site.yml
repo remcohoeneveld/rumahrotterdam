@@ -4,7 +4,7 @@
 prod:
   host: therumahrotterdam.nl
   user: deb105849
-  root: /home/deb105849/domains/therumahrotterdam.nl/public_html/web
+  root: /home/deb105849/domains/therumahrotterdam.nl/httpdocs/web
   uri: https://therumahrotterdam.nl
   paths:
     drush-script: '/home/deb105849/domains/therumahrotterdam.nl/public_html/vendor/bin/drush'
