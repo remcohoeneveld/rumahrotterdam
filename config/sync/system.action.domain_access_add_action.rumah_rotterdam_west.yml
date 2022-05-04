@@ -1,0 +1,14 @@
+uuid: 10c841b5-23ca-4813-be56-0c1c9c57b0c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam_west
+  module:
+    - domain_access
+id: domain_access_add_action.rumah_rotterdam_west
+label: 'Add selected content to the The Rumah West domain'
+type: node
+plugin: domain_access_add_action
+configuration:
+  domain_id: rumah_rotterdam_west

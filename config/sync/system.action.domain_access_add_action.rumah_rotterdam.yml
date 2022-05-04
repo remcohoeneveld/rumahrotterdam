@@ -1,0 +1,14 @@
+uuid: 33a75083-c671-4ba8-9638-e086ce39f394
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam
+  module:
+    - domain_access
+id: domain_access_add_action.rumah_rotterdam
+label: 'Add selected content to the The Rumah domain'
+type: node
+plugin: domain_access_add_action
+configuration:
+  domain_id: rumah_rotterdam

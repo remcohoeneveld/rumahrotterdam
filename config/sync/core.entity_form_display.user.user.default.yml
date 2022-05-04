@@ -3,10 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_darkmode
+    - field.field.user.user.field_domain_access
+    - field.field.user.user.field_domain_all_affiliates
+    - field.field.user.user.field_firstname
+    - field.field.user.user.field_job_title
+    - field.field.user.user.field_lastname
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
-    - image
+    - svg_image
     - user
 _core:
   default_config_hash: FaQ9Ptcpxpg30AtiqRDtl_8zbJArHP1LPfug_s59TOA
@@ -21,6 +27,19 @@ content:
   contact:
     weight: 5
     region: content
+  field_domain_access:
+    type: options_buttons
+    weight: 40
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_domain_all_affiliates:
+    type: boolean_checkbox
+    weight: 41
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   language:
     weight: 0
     region: content

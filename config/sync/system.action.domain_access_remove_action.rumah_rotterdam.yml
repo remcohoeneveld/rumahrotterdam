@@ -1,0 +1,14 @@
+uuid: 9094401a-1937-498e-852e-c19221f22c66
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam
+  module:
+    - domain_access
+id: domain_access_remove_action.rumah_rotterdam
+label: 'Remove selected content from the The Rumah domain'
+type: node
+plugin: domain_access_remove_action
+configuration:
+  domain_id: rumah_rotterdam

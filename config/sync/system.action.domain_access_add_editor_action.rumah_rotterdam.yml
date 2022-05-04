@@ -1,0 +1,14 @@
+uuid: 63291f01-86e6-4029-b86b-c655c95b64ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam
+  module:
+    - domain_access
+id: domain_access_add_editor_action.rumah_rotterdam
+label: 'Add editors to the The Rumah domain'
+type: user
+plugin: domain_access_add_editor_action
+configuration:
+  domain_id: rumah_rotterdam

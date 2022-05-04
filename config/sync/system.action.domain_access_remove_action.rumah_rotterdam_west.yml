@@ -1,0 +1,14 @@
+uuid: f55717ca-28b5-4b53-bcb6-e9bb39d74d0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam_west
+  module:
+    - domain_access
+id: domain_access_remove_action.rumah_rotterdam_west
+label: 'Remove selected content from the The Rumah West domain'
+type: node
+plugin: domain_access_remove_action
+configuration:
+  domain_id: rumah_rotterdam_west

@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
+langcode: en
+uuid: 2f7a1759-309e-43f1-86a2-d0dcff8df7e7
+name: 'The Rumah West'
+mail: edward@therumahrotterdam.com
+slogan: 'Best cocktailpub in Rotterdam West!'
+page:
+  403: ''
+  404: ''
+  front: /node/8
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

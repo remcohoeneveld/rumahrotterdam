@@ -1,0 +1,14 @@
+uuid: a6e6097d-2992-428b-85a7-9e0a0d152422
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam_west
+  module:
+    - domain_access
+id: domain_access_add_editor_action.rumah_rotterdam_west
+label: 'Add editors to the The Rumah West domain'
+type: user
+plugin: domain_access_add_editor_action
+configuration:
+  domain_id: rumah_rotterdam_west

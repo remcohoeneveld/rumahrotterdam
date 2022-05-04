@@ -1,0 +1,14 @@
+uuid: 4809dd36-cdcf-45a0-bb14-576d79f31429
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam
+  module:
+    - domain_access
+id: domain_access_remove_editor_action.rumah_rotterdam
+label: 'Remove editors from the The Rumah domain'
+type: user
+plugin: domain_access_remove_editor_action
+configuration:
+  domain_id: rumah_rotterdam

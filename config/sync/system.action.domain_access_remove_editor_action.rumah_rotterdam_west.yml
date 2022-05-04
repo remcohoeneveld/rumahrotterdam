@@ -1,0 +1,14 @@
+uuid: 2a55a640-de86-4536-8864-a9422972b805
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.rumah_rotterdam_west
+  module:
+    - domain_access
+id: domain_access_remove_editor_action.rumah_rotterdam_west
+label: 'Remove editors from the The Rumah West domain'
+type: user
+plugin: domain_access_remove_editor_action
+configuration:
+  domain_id: rumah_rotterdam_west
