@@ -53,10 +53,19 @@
                 <div>
                   <p aria-hidden="true" class="text-sm text-white">{{ item['#paragraph'].field_subtitle[0].value|raw }}</p>
                   <h3 class="mt-1 font-semibold text-white">
-                    <a href="{{ item['#paragraph'].field_link[0].uri|raw }}">
-                      <span class="absolute inset-0"></span>
-                      {{ item['#paragraph'].field_title[0].value|raw }}
-                    </a>
+                    {% set uri = item['#paragraph'].field_link[0].uri|raw %}
+                    {% if 'entity:node' in uri %}
+                      {% set node_id = uri|split('/')[1]|split('')[0] %}
+                      <a href="{{ path('entity.node.canonical', {'node': node_id}) }}">
+                        <span class="absolute inset-0"></span>
+                        {{ item['#paragraph'].field_title[0].value|raw }}
+                      </a>
+                    {% else %}
+                      <a href="{{ uri }}">
+                        <span class="absolute inset-0"></span>
+                        {{ item['#paragraph'].field_title[0].value|raw }}
+                      </a>
+                    {% endif %}
                   </h3>
                 </div>
               </div>

@@ -9,15 +9,15 @@
  * @ingroup themeable
  */
 #}
-<div class="relative bg-gray-800 dark:bg-black">
+<div class="relative bg-white dark:bg-black my-16">
   <div class="h-56 bg-rumah-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
     <img class="w-full h-full object-cover" src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}" alt="">
   </div>
-  <div class="relative max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+  <div class="relative max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-32">
     <div class="md:ml-auto md:w-1/2 md:pl-10">
-      <h2 class="text-base font-semibold uppercase tracking-wider text-gray-300">{{ content.field_title.0 }}</h2>
-      <p class="mt-2 text-white text-3xl font-extrabold tracking-tight sm:text-4xl">{{ content.field_subtitle.0 }}</p>
-      <p class="mt-3 text-lg text-gray-300">{{ content.body|render|striptags }}</p>
+      <h2 class="text-base font-semibold uppercase tracking-wider text-black dark:text-gray-300">{{ content.field_title.0 }}</h2>
+      <p class="mt-2 text-black dark:text-white text-3xl font-extrabold tracking-tight sm:text-4xl">{{ content.field_subtitle.0 }}</p>
+      <div class="mt-3 text-lg text-black prose dark:prose-invert prose-rumah dark:text-gray-300">{{ content.body.0|render|raw }}</div>
       <div class="mt-8">
         {% if content.field_link_left.0 %}
           <div class="inline-flex rounded-md shadow">

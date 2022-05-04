@@ -61,8 +61,8 @@ function rumah_preprocess_menu(array &$variables): void {
 
     foreach ($variables["items"] as $delta => $item) {
       $variables["items"][$delta]['logo'] = '/' . \Drupal::theme()
-          ->getActiveTheme()
-          ->getPath() . '/images/logo_footer.jpg';
+        ->getActiveTheme()
+        ->getPath() . '/images/logo_footer.jpg';
     }
   }
 }
@@ -70,11 +70,19 @@ function rumah_preprocess_menu(array &$variables): void {
 /**
  * Implements hook_theme_suggestions_alter().
  */
-function rumah_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+function rumah_theme_suggestions_alter(array &$suggestions, array $variables, string $hook): void {
   if ($hook === 'page') {
     $node = \Drupal::routeMatch()->getParameter('node');
     if ($node instanceof Node) {
       $suggestions[] = $hook . '__node_' . $node->bundle();
+      if (
+        $node->hasField('field_only_show_content') &&
+        !$node->get('field_only_show_content')->isEmpty() &&
+        $node->get('field_only_show_content')->value === "1"
+      ) {
+        $suggestions[] = $hook . '__node_' . $node->bundle() . '_only_content';
+      }
+
     }
   }
 }

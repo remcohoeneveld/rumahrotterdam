@@ -1,0 +1,23 @@
+uuid: bed5de3f-0dda-4621-af8c-8f157d02dbc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_only_show_content
+    - node.type.landing_page
+id: node.landing_page.field_only_show_content
+field_name: field_only_show_content
+entity_type: node
+bundle: landing_page
+label: 'Only show content'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'True'
+  off_label: 'False'
+field_type: boolean

@@ -9,7 +9,7 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\stripe_registration\Entity\StripePlanEntity;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\file\Entity\File;
@@ -88,34 +88,6 @@ function rumah_general_user_view(array &$build, UserInterface $account, EntityVi
 }
 
 /**
- * Implements hook_preprocess_HOOK().
- */
-function rumah_general_preprocess_stripe_subscribe(array &$variables): void {
-  if (
-    !isset($variables["plan_entity"]) ||
-    !$variables["plan_entity"] instanceof StripePlanEntity
-  ) {
-    return;
-  }
-
-  $stripe_plan = $variables["plan_entity"];
-
-  if (
-    $stripe_plan->hasField('field_features') &&
-    !$stripe_plan->get('field_features')->isEmpty()
-  ) {
-    $variables['features'] = $stripe_plan->get('field_features')->value;
-  }
-
-  if (
-    $stripe_plan->hasField('field_price') &&
-    !$stripe_plan->get('field_price')->isEmpty()
-  ) {
-    $variables['price'] = $variables["plan_entity"]->get('field_price')->value;
-  }
-}
-
-/**
  * Implements hook_form_alter().
  */
 function rumah_general_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
@@ -174,11 +146,14 @@ function rumah_general_preprocess_block(array &$variables): void {
 function rumah_entity_presave(EntityInterface $entity): void {
 
   // Fix langcode is empty when you use entity browser x inline entity form.
-  if ($entity->getEntityType()->id() === 'paragraph') {
+  if (
+    $entity->getEntityType()->id() === 'paragraph' &&
+    $entity instanceof Paragraph
+  ) {
     $langcode_key = $entity->getEntityType()->getKey('langcode');
-    if (is_string($langcode_key) && $langcode_key !== '') {
+    if (!is_bool($langcode_key) && $langcode_key !== '') {
       $lang_value = $entity->get($langcode_key)->getLangcode();
-      if (is_string($lang_value) && $lang_value !== '') {
+      if ($lang_value !== '') {
         $entity->set($langcode_key, $lang_value);
       }
     }

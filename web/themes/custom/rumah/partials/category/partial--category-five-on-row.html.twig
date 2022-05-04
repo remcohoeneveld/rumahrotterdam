@@ -10,7 +10,13 @@
   {% if content.field_category_items.0 %}
     <div class="absolute min-w-screen-xl px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
       {% for key, item in content.field_category_items if key|first != '#'%}
-        <a href="{{ item['#paragraph'].field_link[0].uri|raw }}" class="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
+        {% set uri = item['#paragraph'].field_link[0].uri|raw %}
+        {% if 'entity:node' in uri %}
+          {% set node_id = uri|split('/')[1]|split('')[0] %}
+          <a href="{{ path('entity.node.canonical', {'node': node_id}) }}" class="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
+        {% else %}
+          <a href="{{ item['#paragraph'].field_link[0].uri|raw }}" class="relative w-56 h-80 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
+        {% endif %}
           <span aria-hidden="true" class="absolute inset-0">
                   <img src="{{ file_url(item['#paragraph'].field_image.entity.field_media_image.entity.fileuri)  }}" alt="category image." class="w-full h-full object-center object-cover">
                 </span>

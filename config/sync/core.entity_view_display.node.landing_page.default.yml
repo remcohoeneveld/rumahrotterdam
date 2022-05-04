@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.landing_page.body
+    - field.field.node.landing_page.field_only_show_content
+    - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
     - layout_builder
+    - layout_discovery
     - text
     - user
 third_party_settings:
@@ -44,6 +47,24 @@ third_party_settings:
                 third_party_settings: {  }
             weight: 1
             additional: {  }
+          066beaa7-a18f-4fb0-b322-faebd94b6be1:
+            uuid: 066beaa7-a18f-4fb0-b322-faebd94b6be1
+            region: content
+            configuration:
+              id: 'field_block:node:landing_page:field_only_show_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: boolean
+                label: above
+                settings:
+                  format: default
+                  format_custom_false: ''
+                  format_custom_true: ''
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
         third_party_settings: {  }
 id: node.landing_page.default
 targetEntityType: node
@@ -56,6 +77,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_only_show_content:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }

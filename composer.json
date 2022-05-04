@@ -57,7 +57,6 @@
         "drupal/svg_image": "^1.15",
         "drupal/tailwindcss": "^5.0@alpha",
         "drupal/twig_tweak": "^3.1",
-        "drupal/twig_xdebug": "^1.2",
         "drupal/vapn": "^1.5",
         "drupal/video_embed_field": "^2.4",
         "drupal/video_embed_spotify": "^1.5",
@@ -68,6 +67,7 @@
     },
     "require-dev": {
         "drupal/core-dev": "^9.3",
+        "drupal/twig_xdebug": "^1.2",
         "mglaman/phpstan-drupal": "^1.1.4",
         "phpspec/prophecy-phpunit": "^2",
         "phpstan/phpstan-deprecation-rules": "^1.0",
