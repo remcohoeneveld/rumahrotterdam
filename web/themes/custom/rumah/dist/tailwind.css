@@ -2770,6 +2770,11 @@ select {
   background-color: rgb(223 115 94 / var(--tw-bg-opacity));
 }
 
+.page-only-content-centered .container {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 @media (min-width: 1024px) {
   .page-only-content-centered .container {
     display: flex;
@@ -2786,6 +2791,10 @@ select {
   .page-only-content-centered .container {
     justify-content: center;
   }
+}
+
+#block-tabs {
+  width: 100%;
 }
 
 .password-suggestions, .description {
