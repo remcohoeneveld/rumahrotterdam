@@ -2770,25 +2770,25 @@ select {
   background-color: rgb(223 115 94 / var(--tw-bg-opacity));
 }
 
-.page-only-content-centered .container {
+.page-only-content-centered .category-two-on-row {
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 @media (min-width: 1024px) {
-  .page-only-content-centered .container {
+  .page-only-content-centered .category-two-on-row {
     display: flex;
   }
 
-  .page-only-content-centered .container {
+  .page-only-content-centered .category-two-on-row {
     height: 100vh;
   }
 
-  .page-only-content-centered .container {
+  .page-only-content-centered .category-two-on-row {
     align-items: center;
   }
 
-  .page-only-content-centered .container {
+  .page-only-content-centered .category-two-on-row {
     justify-content: center;
   }
 }
