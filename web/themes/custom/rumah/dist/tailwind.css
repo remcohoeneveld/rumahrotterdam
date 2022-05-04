@@ -1520,6 +1520,11 @@ select {
   margin-right: auto;
 }
 
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -1528,16 +1533,6 @@ select {
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.my-16 {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
 }
 
 .mt-auto {
@@ -2773,6 +2768,24 @@ select {
 .password-strength__indicator {
   --tw-bg-opacity: 1;
   background-color: rgb(223 115 94 / var(--tw-bg-opacity));
+}
+
+@media (min-width: 1024px) {
+  .page-only-content-centered .container {
+    display: flex;
+  }
+
+  .page-only-content-centered .container {
+    height: 100vh;
+  }
+
+  .page-only-content-centered .container {
+    align-items: center;
+  }
+
+  .page-only-content-centered .container {
+    justify-content: center;
+  }
 }
 
 .password-suggestions, .description {
