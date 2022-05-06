@@ -1,0 +1,14 @@
+uuid: b5f05bcf-49f1-4f3a-9fe0-a56c07378b7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.therumah
+  module:
+    - domain_access
+id: domain_access_remove_action.therumah
+label: 'Remove selected content from the The Rumah domain'
+type: node
+plugin: domain_access_remove_action
+configuration:
+  domain_id: therumah

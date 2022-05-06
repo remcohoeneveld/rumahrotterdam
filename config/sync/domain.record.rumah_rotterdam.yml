@@ -4,8 +4,8 @@ status: true
 dependencies: {  }
 id: rumah_rotterdam
 domain_id: 6523931
-hostname: therumahrotterdam.nl
+hostname: therumahrotterdam.com
 name: 'The Rumah'
 scheme: variable
 weight: 1
-is_default: true
+is_default: false

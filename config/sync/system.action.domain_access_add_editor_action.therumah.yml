@@ -1,0 +1,14 @@
+uuid: 3f700e66-6e60-461d-a3dc-68ec2338efab
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.therumah
+  module:
+    - domain_access
+id: domain_access_add_editor_action.therumah
+label: 'Add editors to the The Rumah domain'
+type: user
+plugin: domain_access_add_editor_action
+configuration:
+  domain_id: therumah

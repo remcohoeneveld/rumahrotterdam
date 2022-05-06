@@ -4,7 +4,7 @@ status: true
 dependencies: {  }
 id: rumah_rotterdam_west
 domain_id: 82227
-hostname: west.therumahrotterdam.nl
+hostname: therumahwest.com
 name: 'The Rumah West'
 scheme: variable
 weight: 2

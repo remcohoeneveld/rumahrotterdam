@@ -1,0 +1,14 @@
+uuid: 7fd57fcc-6a95-4ff7-b03b-157b043c8b4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - domain.record.therumah
+  module:
+    - domain_access
+id: domain_access_add_action.therumah
+label: 'Add selected content to the The Rumah domain'
+type: node
+plugin: domain_access_add_action
+configuration:
+  domain_id: therumah
