@@ -13,7 +13,7 @@
   <div class="w-full mx-auto py-16 px-4 sm:px-6 lg:px-8">
     <div class="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
       {% if content.field_image is not empty %}
-        <img class="h-full object-fill" src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}" alt="App screenshot">
+        <img class="h-full object-cover" src="{{ file_url(content.field_image[0]['#media'].field_media_image.entity.uri.value) }}" alt="App screenshot">
       {% endif %}
       <div class="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
         <div class="mx-auto max-w-7xl container lg:self-center">
