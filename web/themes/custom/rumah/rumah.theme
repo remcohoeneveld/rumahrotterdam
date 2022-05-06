@@ -104,7 +104,8 @@ function rumah_theme_suggestions_paragraph_alter(array &$suggestions, array $var
     $block_content = $paragraph->getParentEntity();
     if (
       $block_content->hasField('field_feature_type') &&
-      !$block_content->get('field_feature_type')->isEmpty()
+      !$block_content->get('field_feature_type')->isEmpty() &&
+      isset($suggestions[1])
     ) {
       $suggestions[] = $suggestions[1] . '_' . $block_content->get('field_feature_type')->value;
     }
@@ -119,7 +120,9 @@ function rumah_theme_suggestions_menu_alter(array &$suggestions, array $variable
   $logged_in = \Drupal::currentUser()->isAuthenticated();
   $logged_in_string = $logged_in ? 'logged_in' : 'not_logged_in';
 
-  $suggestions[] = $suggestions[0] . '_' . $logged_in_string;
+  if (isset($suggestions[0])) {
+    $suggestions[] = $suggestions[0] . '_' . $logged_in_string;
+  }
 }
 
 /**

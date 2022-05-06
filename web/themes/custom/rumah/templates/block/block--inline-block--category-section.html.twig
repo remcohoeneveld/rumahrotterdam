@@ -34,13 +34,13 @@
     {% if category_type == 'one_big_two_small' %}
       {% include directory ~ "/partials/category/partial--category-one-big-two-small.html.twig" %}
     {% elseif category_type == 'three_on_row' %}
-      {% include directory ~ "/partials/category/partial--category-three-on-row.html.twig" %}
+      {% include directory ~ "/templates/partials/category/partial--category-three-on-row.html.twig" %}
     {% elseif category_type == 'two_on_row' %}
-      {% include directory ~ "/partials/category/partial--category-two-on-row.html.twig" %}
+      {% include directory ~ "/templates/partials/category/partial--category-two-on-row.html.twig" %}
     {% elseif category_type == 'three_on_row_with_background' %}
-      {% include directory ~ "/partials/category/partial--category-three-on-row-with-background.html.twig" %}
+      {% include directory ~ "/templates/partials/category/partial--category-three-on-row-with-background.html.twig" %}
     {% elseif category_type == 'five_on_row' %}
-      {% include directory ~ "/partials/category/partial--category-five-on-row.html.twig" %}
+      {% include directory ~ "/templates/partials/category/partial--category-five-on-row.html.twig" %}
     {% endif %}
   {% endblock %}
   {{ title_suffix }}

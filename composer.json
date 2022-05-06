@@ -49,6 +49,7 @@
         "drupal/metatag": "^1.18",
         "drupal/paragraphs": "^1.12",
         "drupal/pathauto": "^1.8",
+        "drupal/permissions_filter": "^1.2",
         "drupal/recaptcha": "^3.0",
         "drupal/redirect": "^1.7",
         "drupal/remove_username": "^1.1",

@@ -47,13 +47,13 @@
 <div class="container mx-auto"data-drupal-messages>
   {% for type, messages in message_list %}
       {% if status_classes[type] == 'danger' %}
-        {% include directory ~ "/partials/status-messages/partial--status-message-error.html.twig" %}
+        {% include directory ~ "/templates/partials/status-messages/partial--status-message-error.html.twig" %}
       {% elseif status_classes[type] == 'success' %}
-        {% include directory ~ "/partials/status-messages/partial--status-message-status.html.twig" %}
+        {% include directory ~ "/templates/partials/status-messages/partial--status-message-status.html.twig" %}
       {% elseif status_classes[type] == 'info' %}
-        {% include directory ~ "/partials/status-messages/partial--status-message-info.html.twig" %}
+        {% include directory ~ "/templates/partials/status-messages/partial--status-message-info.html.twig" %}
       {% elseif status_classes[type] == 'warning' %}
-        {% include directory ~ "/partials/status-messages/partial--status-message-warning.html.twig" %}
+        {% include directory ~ "/templates/partials/status-messages/partial--status-message-warning.html.twig" %}
       {% endif %}
   {% endfor %}
 </div>

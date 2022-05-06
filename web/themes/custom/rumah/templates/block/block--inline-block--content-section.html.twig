@@ -36,13 +36,13 @@
   {% block content %}
     {% set content_type = content.field_content_type.0|render %}
     {% if content_type == 'centered' %}
-      {% include directory ~ "/partials/content/partial--content-centered.html.twig" %}
+      {% include directory ~ "/templates/partials/content/partial--content-centered.html.twig" %}
     {% elseif content_type == 'split_with_image' %}
-      {% include directory ~ "/partials/content/partial--content-split-with-image.html.twig" %}
+      {% include directory ~ "/templates/partials/content/partial--content-split-with-image.html.twig" %}
     {% elseif content_type == 'two_columns_with_image' %}
-      {% include directory ~ "/partials/content/partial--content-two-columns-with-image.html.twig" %}
+      {% include directory ~ "/templates/partials/content/partial--content-two-columns-with-image.html.twig" %}
     {% elseif content_type == 'two_columns' %}
-      {% include directory ~ "/partials/content/partial--content-two-columns.html.twig" %}
+      {% include directory ~ "/templates/partials/content/partial--content-two-columns.html.twig" %}
     {% endif %}
   {% endblock %}
 </div>

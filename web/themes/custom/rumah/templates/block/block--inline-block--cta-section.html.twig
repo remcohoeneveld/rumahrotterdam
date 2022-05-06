@@ -36,21 +36,21 @@
   {% block content %}
     {% set cta_type = content.field_cta_type.0|render %}
     {% if cta_type == 'simple_centered' %}
-      {% include directory ~ "/partials/cta/partial--cta-simple-centered.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-simple-centered.html.twig" %}
     {% elseif cta_type == 'simple_center_branded' %}
-      {% include directory ~ "/partials/cta/partial--cta-simple-center-branded.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-simple-center-branded.html.twig" %}
     {% elseif cta_type == 'simple_justified_on_brand' %}
-      {% include directory ~ "/partials/cta/partial--cta-simple-justified-on-brand.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-simple-justified-on-brand.html.twig" %}
     {% elseif cta_type == 'simple_justified' %}
-      {% include directory ~ "/partials/cta/partial--cta-simple-justified.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-simple-justified.html.twig" %}
     {% elseif cta_type == 'simple_stacked' %}
-      {% include directory ~ "/partials/cta/partial--cta-simple-stacked.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-simple-stacked.html.twig" %}
     {% elseif cta_type == 'split_with_image' %}
-      {% include directory ~ "/partials/cta/partial--cta-split-with-image.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-split-with-image.html.twig" %}
     {% elseif cta_type == 'brand_panel_with_overlapping_image' %}
-      {% include directory ~ "/partials/cta/partial--cta-brand-panel-with-overlapping-image.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-brand-panel-with-overlapping-image.html.twig" %}
     {% elseif cta_type == 'brand_panel_with_app_screenshot' %}
-      {% include directory ~ "/partials/cta/partial--cta-brand-panel-with-app-screenshot.html.twig" %}
+      {% include directory ~ "/templates/partials/cta/partial--cta-brand-panel-with-app-screenshot.html.twig" %}
     {% endif %}
   {% endblock %}
 </div>

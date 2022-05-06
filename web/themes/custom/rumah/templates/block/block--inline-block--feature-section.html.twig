@@ -36,13 +36,13 @@
   {% block content %}
     {% set feature_type = content.field_feature_type.0|render %}
     {% if feature_type == 'with_feature_list' %}
-      {% include directory ~ "/partials/feature/partial--feature-with-feature-list.html.twig" %}
+      {% include directory ~ "/templates/partials/feature/partial--feature-with-feature-list.html.twig" %}
     {% elseif feature_type == 'with_feature_grid_list' %}
-      {% include directory ~ "/partials/feature/partial--feature-with-feature-grid-list.html.twig" %}
+      {% include directory ~ "/templates/partials/feature/partial--feature-with-feature-grid-list.html.twig" %}
     {% elseif feature_type == 'grid_with_offset_icons' %}
-      {% include directory ~ "/partials/feature/partial--feature-grid-with-offset-icons.html.twig" %}
+      {% include directory ~ "/templates/partials/feature/partial--feature-grid-with-offset-icons.html.twig" %}
     {% elseif feature_type == '4_2_grid_on_brand' %}
-      {% include directory ~ "/partials/feature/partial--feature-4-2-on-brand.html.twig" %}
+      {% include directory ~ "/templates/partials/feature/partial--feature-4-2-on-brand.html.twig" %}
     {% endif %}
   {% endblock %}
 </div>

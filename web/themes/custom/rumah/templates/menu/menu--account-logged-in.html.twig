@@ -29,10 +29,7 @@ We call a macro which calls itself to render the full tree.
     {% import _self as menus %}
     {% if items %}
       {% for item in items | children(true) %}
-
-        <a href="{{ item.url }}" class="mt-6 uppercase text-gray-500 dark:text-white hover:bg-rumah-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-          {{ item.title }}
-        </a>
+        {% include "themes/custom/rumah/templates/partials/components/partial--menu-item.html.twig" %}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}

@@ -134,6 +134,8 @@ permissions:
   - 'view all media revisions'
   - 'view all revisions'
   - 'view article revisions'
+  - 'view assigned domains'
+  - 'view domain list'
   - 'view landing_page revisions'
   - 'view media'
   - 'view own unpublished content'

@@ -36,13 +36,13 @@
   {% block content %}
     {% set hero_type = content.field_hero_type.0|render %}
     {% if hero_type == 'angled_image_on_right' %}
-      {% include directory ~ "/partials/hero/partial--hero-angled-image-on-right.html.twig" %}
+      {% include directory ~ "/templates/partials/hero/partial--hero-angled-image-on-right.html.twig" %}
     {% elseif hero_type == 'app_screenshot' %}
-      {% include directory ~ "/partials/hero/partial--hero-app-screenshot.html.twig" %}
+      {% include directory ~ "/templates/partials/hero/partial--hero-app-screenshot.html.twig" %}
     {% elseif hero_type == 'card_with_background' %}
-      {% include directory ~ "/partials/hero/partial--hero-card-with-background.html.twig" %}
+      {% include directory ~ "/templates/partials/hero/partial--hero-card-with-background.html.twig" %}
     {% elseif hero_type == 'split_with_screenshot' %}
-      {% include directory ~ "/partials/hero/partial--hero-split-with-screenshot.html.twig" %}
+      {% include directory ~ "/templates/partials/hero/partial--hero-split-with-screenshot.html.twig" %}
     {% endif %}
   {% endblock %}
 </div>
