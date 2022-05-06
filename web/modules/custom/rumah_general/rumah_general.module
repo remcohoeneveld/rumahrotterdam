@@ -20,8 +20,8 @@ use Drupal\file\Entity\File;
 function rumah_general_entity_extra_field_info(): array {
   $fields = [];
   $fields['user']['user']['display']['subscription'] = [
-    'label' => t('Subscription'),
-    'description' => t('User subscription view element.'),
+    'label' => t('User role'),
+    'description' => t('User role view element.'),
     'weight' => 5,
   ];
 
