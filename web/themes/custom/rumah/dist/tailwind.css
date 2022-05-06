@@ -2216,6 +2216,11 @@ select {
      object-fit: cover;
 }
 
+.object-fill {
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
 .object-scale-down {
   -o-object-fit: scale-down;
      object-fit: scale-down;
@@ -3206,10 +3211,6 @@ select {
     height: 18rem;
   }
 
-  .sm\:max-h-12 {
-    max-height: 3rem;
-  }
-
   .sm\:w-auto {
     width: auto;
   }
@@ -3522,12 +3523,12 @@ select {
     height: 10rem;
   }
 
-  .md\:h-full {
-    height: 100%;
-  }
-
   .md\:h-96 {
     height: 24rem;
+  }
+
+  .md\:h-full {
+    height: 100%;
   }
 
   .md\:w-1\/4 {
