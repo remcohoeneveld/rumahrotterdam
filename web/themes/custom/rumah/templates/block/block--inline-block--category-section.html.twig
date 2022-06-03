@@ -32,7 +32,7 @@
   {% block content %}
     {% set category_type = content.field_category_type.0|render %}
     {% if category_type == 'one_big_two_small' %}
-      {% include directory ~ "/partials/category/partial--category-one-big-two-small.html.twig" %}
+      {% include directory ~ "/templates/partials/category/partial--category-one-big-two-small.html.twig" %}
     {% elseif category_type == 'three_on_row' %}
       {% include directory ~ "/templates/partials/category/partial--category-three-on-row.html.twig" %}
     {% elseif category_type == 'two_on_row' %}
