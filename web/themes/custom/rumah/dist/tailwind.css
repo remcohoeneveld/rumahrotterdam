@@ -1748,22 +1748,12 @@ select {
   height: 14rem;
 }
 
-.h-max {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-}
-
 .h-64 {
   height: 16rem;
 }
 
 .h-5 {
   height: 1.25rem;
-}
-
-.max-h-8 {
-  max-height: 2rem;
 }
 
 .max-h-72 {
@@ -2601,6 +2591,10 @@ select {
   opacity: 0.5;
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .mix-blend-multiply {
   mix-blend-mode: multiply;
 }
@@ -3220,12 +3214,6 @@ select {
     height: 18rem;
   }
 
-  .sm\:h-max {
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
-  }
-
   .sm\:max-h-full {
     max-height: 100%;
   }
@@ -3464,6 +3452,10 @@ select {
   .sm\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .sm\:opacity-0 {
+    opacity: 0;
   }
 
   .dark .dark\:sm\:divide-rumah-800 > :not([hidden]) ~ :not([hidden]) {

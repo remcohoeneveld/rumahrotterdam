@@ -18,6 +18,9 @@ settings:
       value: two_on_row
       label: 'Two on row'
     -
+      value: two_on_row_with_background
+      label: 'Two on row with background'
+    -
       value: three_on_row
       label: 'Three on row'
     -
